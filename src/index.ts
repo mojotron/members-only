@@ -1,9 +1,28 @@
-import express from "express";
+import path from 'path';
+import dotenv from 'dotenv';
+import express, { Express, Request, Response } from 'express';
+//
+import connectDB from './db/connect';
 
-const app = express();
+dotenv.config();
+const PORT = process.env.PORT || 5000;
+const app: Express = express();
 
-app.get("/", (req, res) => {
-  res.send("hello world");
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+app.get('/', (req: Request, res: Response) => {
+  res.render('index');
 });
 
-app.listen(5000, () => console.log("listening on port 5000"));
+const start = async () => {
+  try {
+    await connectDB(process.env.MONGO_URI as string);
+    console.log('db connected...');
+    app.listen(PORT, () => console.log(`server listening at port ${PORT}`));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+start();
