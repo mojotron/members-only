@@ -1,16 +1,17 @@
 import { Request, Response, NextFunction } from 'express';
 import User from 'src/models/user';
 
-const signUp = (req: Request, res: Response, next: NextFunction) => {
-  res.send('signUp');
+const signUpGet = (req: Request, res: Response, next: NextFunction) => {
+  res.status(200).render('pages/sign-up', {
+    errors: {
+      username: 'please provide username',
+    },
+  });
 };
 
-const logIn = (req: Request, res: Response, next: NextFunction) => {
-  res.send('signUp');
+const signUpPost = (req: Request, res: Response, next: NextFunction) => {
+  console.log('hello');
+  res.status(200).render('pages/sign-up');
 };
 
-const logOut = (req: Request, res: Response, next: NextFunction) => {
-  res.send('signUp');
-};
-
-export { signUp, logIn, logOut };
+export { signUpGet, signUpPost };

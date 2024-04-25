@@ -14,13 +14,15 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
 
-app.get('/', authRouter);
+app.use('/', authRouter);
 
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI as string);
-    console.log('db connected...');
-    app.listen(PORT, () => console.log(`server listening at port ${PORT}`));
+    console.log('> db connected');
+    app.listen(PORT, () =>
+      console.log(`> server running, http://localhost:${PORT}`),
+    );
   } catch (error) {
     console.log(error);
   }

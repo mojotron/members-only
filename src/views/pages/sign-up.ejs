@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Members Only | learn session auth basics</title>
+  </head>
+  <body class="px-8 py-16 flex flex-col items-center bg-gray-100 text-gray-600 font-sans">
+    <h2 class="font-display font-bold uppercase text-green-500">Create user account</h2>
+    <form action="/sign-up" method="post" class="flex flex-col gap-3">
+      <div>
+        <label for="firstName">first name</label>
+        <input type="text" name="firstName" id="firstName" />
+        <% if (errors.firstName) { %>
+          <p><%= errors.firstName %></p>
+        <% } %>
+      </div>
+
+      <div>
+        <label for="lastName">last name</label>
+        <input type="text" name="lastName" id="lastName" />
+        <% if (errors.lastName) { %>
+          <p><%= errors.lastName %></p>
+        <% } %>
+      </div>
+
+      <div>
+        <label for="username">username</label>
+        <input type="text" name="username" id="username" class="outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-500"/>
+        <% if (errors.username) { %>
+          <p class="text-red-500 text-center"><%= errors.username %></p>
+        <% } %>
+      </div>
+
+      <div>
+        <label for="password">password</label>
+        <input type="password" name="password" id="password" />
+        <% if (errors.password) { %>
+          <p><%= errors.password %></p>
+        <% } %>
+      </div>
+
+      <div>
+        <label for="passwordRepeat">repeat password</label>
+        <input
+          type="passwordRepeat"
+          name="passwordRepeat"
+          id="passwordRepeat"
+        />
+        <% if (errors.passwordRepeat) { %>
+          <p><%= errors.passwordRepeat %></p>
+        <% } %>
+      </div>
+
+      <button type="submit">sign up</button>
+    </form>
+  </body>
+</html>
