@@ -7,53 +7,67 @@
     <title>Members Only | learn session auth basics</title>
   </head>
   <body class="px-8 py-16 flex flex-col items-center bg-gray-100 text-gray-600 font-sans">
-    <h2 class="font-display font-bold uppercase text-green-500">Create user account</h2>
-    <form action="/sign-up" method="post" class="flex flex-col gap-3">
+    <h2 class="font-display font-bold uppercase text-2xl">Create user account</h2>
+    <form action="/sign-up" method="post" class="flex flex-col gap-2 py-8">
       <div>
-        <label for="firstName">first name</label>
-        <input type="text" name="firstName" id="firstName" />
+        <div class="flex flex-col text-md">
+          <label for="firstName">first name</label>
+          <input type="text" name="firstName" id="firstName" class="outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-300"/>
+        </div>
         <% if (errors.firstName) { %>
           <p><%= errors.firstName %></p>
         <% } %>
       </div>
 
       <div>
-        <label for="lastName">last name</label>
-        <input type="text" name="lastName" id="lastName" />
+        <div class="flex flex-col gap-2 text-md">
+          <label for="lastName">last name</label>
+          <input type="text" name="lastName" id="lastName" class="outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-300"/>
+        </div>
         <% if (errors.lastName) { %>
           <p><%= errors.lastName %></p>
         <% } %>
       </div>
 
       <div>
-        <label for="username">username</label>
-        <input type="text" name="username" id="username" class="outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-500"/>
+        <div class="flex flex-col gap-2 text-md">
+          <label for="username">username</label>
+          <input type="text" name="username" id="username" class="outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-300"/>
+        </div>
         <% if (errors.username) { %>
           <p class="text-red-500 text-center"><%= errors.username %></p>
         <% } %>
       </div>
 
       <div>
-        <label for="password">password</label>
-        <input type="password" name="password" id="password" />
+        <div class="flex flex-col gap-2 text-md">
+          <label for="password">password</label>
+          <input type="password" name="password" id="password" class="outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-300"/>
+        </div>
         <% if (errors.password) { %>
           <p><%= errors.password %></p>
         <% } %>
       </div>
 
       <div>
-        <label for="passwordRepeat">repeat password</label>
-        <input
-          type="passwordRepeat"
-          name="passwordRepeat"
-          id="passwordRepeat"
-        />
+        <div class="flex flex-col gap-2 text-md">
+          <label for="passwordRepeat">repeat password</label>
+          <input
+            type="passwordRepeat"
+            name="passwordRepeat"
+            id="passwordRepeat"
+            class="outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-500"
+          />
+
+        </div>
         <% if (errors.passwordRepeat) { %>
           <p><%= errors.passwordRepeat %></p>
         <% } %>
       </div>
 
-      <button type="submit">sign up</button>
+      <button type="submit" class="mt-8 px-4 py-2 font-display font-bold text-md bg-green-500 text-gray-100 border border-gray-100 hover:border-green-500 hover:bg-gray-100 hover:text-green-500">sign up</button>
     </form>
+
+    <a href="/" class="underline text-green-500 hover:text-gray-600">home page</a>
   </body>
 </html>
