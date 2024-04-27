@@ -3,7 +3,7 @@ import { signUpGet, signUpPost } from '../controllers/auth';
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   res.render('pages/index');
 });
 

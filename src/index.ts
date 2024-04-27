@@ -4,6 +4,8 @@ import express from 'express';
 //
 import connectDB from './db/connect';
 import authRouter from './routes/auth';
+import notFoundMiddleware from './middleware/notFound';
+import errorHandlerMiddleware from './middleware/errorHandler';
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
@@ -15,6 +17,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/', authRouter);
+app.use(notFoundMiddleware);
+app.use(errorHandlerMiddleware);
 
 const start = async () => {
   try {
