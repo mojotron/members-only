@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: ['Nunito', 'sans-serif'],
-      display: ['Signika', 'serif'],
+      display: ['Archivo Black', 'serif'],
     },
     colors: {
       gray: {

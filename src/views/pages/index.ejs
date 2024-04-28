@@ -4,9 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    <title>Document</title>
+    <title>Members Only | learn session auth basics</title>
   </head>
-  <body class="bg-red-300">
-    <h1>Members only</h1>
+  <body
+    class="px-8 pt-16 pb-8 min-h-[100vh] flex flex-col items-center bg-gray-100 text-gray-600 font-sans"
+  >
+    <%- include('../partials/header', {loginBtn: true}) %>
+
+    <%- include('../partials/footer') %>
+
   </body>
 </html>
