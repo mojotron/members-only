@@ -2,6 +2,8 @@
 
 Build an exclusive clubhouse where members can write anonymous posts. Inside the clubhouse, members can see who the author of a post is, but outside they can only see the story and wonder who wrote it.
 
+This project is part of [The Odin Project](https://www.theodinproject.com/lessons/nodejs-mini-message-board) curriculum.
+
 Goal of this project is practice building express apps, adding authentication and using typescript as additional learning layer.
 
 ## Technologies used
