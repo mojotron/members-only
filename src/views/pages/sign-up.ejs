@@ -12,7 +12,7 @@
       <div>
         <div class="flex flex-col text-md">
           <label for="firstName">first name</label>
-          <input type="text" name="firstName" id="firstName" class="outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-300"/>
+          <input type="text" name="firstName" id="firstName" class="bg-gray-100 outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-300"/>
         </div>
         <% if (errors.firstName) { %>
           <p><%= errors.firstName %></p>
@@ -22,7 +22,7 @@
       <div>
         <div class="flex flex-col gap-2 text-md">
           <label for="lastName">last name</label>
-          <input type="text" name="lastName" id="lastName" class="outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-300"/>
+          <input type="text" name="lastName" id="lastName" class="bg-gray-100 outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-300"/>
         </div>
         <% if (errors.lastName) { %>
           <p><%= errors.lastName %></p>
@@ -32,7 +32,7 @@
       <div>
         <div class="flex flex-col gap-2 text-md">
           <label for="username">username</label>
-          <input type="text" name="username" id="username" class="outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-300"/>
+          <input type="text" name="username" id="username" class="bg-gray-100 outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-300"/>
         </div>
         <% if (errors.username) { %>
           <p class="text-red-500 text-center"><%= errors.username %></p>
@@ -42,7 +42,7 @@
       <div>
         <div class="flex flex-col gap-2 text-md">
           <label for="password">password</label>
-          <input type="password" name="password" id="password" class="outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-300"/>
+          <input type="password" name="password" id="password" class="bg-gray-100 outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-300"/>
         </div>
         <% if (errors.password) { %>
           <p><%= errors.password %></p>
@@ -56,7 +56,7 @@
             type="password"
             name="passwordRepeat"
             id="passwordRepeat"
-            class="outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-500"
+            class="bg-gray-100 outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-500"
           />
 
         </div>
@@ -65,7 +65,7 @@
         <% } %>
       </div>
 
-      <button type="submit" class="mt-8 px-4 py-2 font-display font-bold text-md bg-green-500 text-gray-100 border border-gray-100 hover:border-green-500 hover:bg-gray-100 hover:text-green-500">sign up</button>
+      <button type="submit" class="mt-8 px-4 py-2 font-display font-bold text-md bg-green-500 text-gray-100 border border-gray-100 hover:border-green-500 hover:bg-gray-100 hover:text-green-500">signup</button>
     </form>
 
     <a href="/login" class="underline text-green-500 hover:text-gray-600">already have account, login</a>
