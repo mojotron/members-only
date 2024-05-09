@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Members Only | learn session auth basics</title>
+  </head>
+  <body
+    class="px-8 py-16 flex flex-col gap-8 items-center bg-gray-100 text-gray-600 font-sans"
+  >
+  <%- include('../partials/header', {loginBtn: false}) %>
+
+    <form action="/new-message" method="post" class="flex flex-col items-center gap-3">
+      <div class="space-y-3">
+        <div>
+          <div class="flex flex-col gap-2 text-md">
+            <label for="messageTitle">title</label>
+            <input type="text" name="messageTitle" id="messageTitle" class="bg-gray-100 outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-300"/>
+          </div>
+          <% if (errors.username) { %>
+            <p class="text-red-500 text-center"><%= errors.username %></p>
+          <% } %>
+        </div>
+      </div>
+  
+      <div>
+        <div class="flex flex-col gap-2 text-md">
+          <label for="messageBody">message</label>
+          <textarea type="messageBody" name="messageBody" id="messageBody" class="bg-gray-100 h-24 outline-none border border-gray-400 px-2 focus:ring focus:ring-green-300"></textarea>
+        </div>
+        <% if (errors.password) { %>
+          <p><%= errors.password %></p>
+        <% } %>
+      </div>
+
+      </div>
+    <button type="submit" class="mt-8 px-4 py-2 font-display font-bold text-md bg-green-500 text-gray-100 border border-gray-100 hover:border-green-500 hover:bg-gray-100 hover:text-green-500">create message</button>
+    </form>
+    
+
+  </body>
+</html>
+

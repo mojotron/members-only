@@ -17,6 +17,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/', authRouter);
+// temp
+app.get('/new-message', (req, res) => {
+  return res.render('pages/message-form', { errors: {} });
+});
+// temp
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
