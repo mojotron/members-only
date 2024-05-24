@@ -1,12 +1,12 @@
 import express from 'express';
+import { checkSchema } from 'express-validator';
 import {
-  signUpGet,
-  signUpPost,
+  registerGet,
+  registerPost,
   loginGet,
   loginPost,
 } from '../controllers/auth';
-
-import signupValidator from '../validators/signUp';
+import createUserValidation from '../utils/validatorsConfig';
 
 const router = express.Router();
 
@@ -14,8 +14,8 @@ router.get('/', (req, res) => {
   return res.render('pages/index', { errors: {} });
 });
 
-router.get('/sign-up', signUpGet);
-router.post('/sign-up', signupValidator, signUpPost);
+router.get('/register', registerGet);
+router.post('/register', checkSchema(createUserValidation), registerPost);
 router.get('/login', loginGet);
 router.post('/login', loginPost);
 

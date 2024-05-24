@@ -3,13 +3,13 @@ import asyncHandler from 'express-async-handler';
 import { validationResult, FieldValidationError } from 'express-validator';
 import User from 'src/models/user';
 
-const signUpGet = (req: Request, res: Response) => {
-  res.status(200).render('pages/sign-up', {
+const registerGet = (req: Request, res: Response) => {
+  res.status(200).render('pages/register', {
     errors: {},
   });
 };
 
-const signUpPost = asyncHandler(
+const registerPost = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
     const { password, passwordRepeat } = req.body;
@@ -41,4 +41,6 @@ const loginPost = (req: Request, res: Response, next: NextFunction) => {
   res.status(200).render('pages/login');
 };
 
-export { signUpGet, signUpPost, loginGet, loginPost };
+const logout = () => {};
+
+export { registerGet, registerPost, loginGet, loginPost, logout };
