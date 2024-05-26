@@ -7,6 +7,13 @@ import { generatePassword } from '../utils/passwordHelpers';
 const registerGet = (req: Request, res: Response) => {
   res.status(200).render('pages/register', {
     errors: {},
+    inputValues: {
+      firstName: '',
+      lastName: '',
+      username: '',
+      password: '',
+      passwordRepeat: '',
+    },
   });
 };
 
@@ -15,8 +22,12 @@ const registerPost = asyncHandler(async (req: Request, res: Response) => {
   const { firstName, lastName, username, password, passwordRepeat } = req.body;
 
   const equalPasswords = password === passwordRepeat;
+  // check unique username
+  const checkUser = await User.findOne({ username });
 
-  if (!errors.isEmpty() && !equalPasswords) {
+  if (!errors.isEmpty() || !equalPasswords || checkUser !== null) {
+    console.log('BUG?');
+
     const errorsObj: { [key: string]: string } = {};
     errors.array().forEach(err => {
       const { path, msg } = err as FieldValidationError;
@@ -24,9 +35,22 @@ const registerPost = asyncHandler(async (req: Request, res: Response) => {
     });
 
     if (!equalPasswords)
-      errorsObj.notEqualPasswords = 'passwords must be equal';
+      errorsObj.notEqualPasswords =
+        'password and repeat password must be equal';
 
-    return res.status(200).render('pages/register', { errors: errorsObj });
+    if (checkUser !== null)
+      errorsObj.notUniqueUsername = 'username already exists';
+
+    return res.status(200).render('pages/register', {
+      errors: errorsObj,
+      inputValues: {
+        firstName,
+        lastName,
+        username,
+        password,
+        passwordRepeat,
+      },
+    });
   }
 
   const hashedPassword = await generatePassword(password);

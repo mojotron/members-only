@@ -624,6 +624,9 @@ video {
 .text-4xl{
   font-size: 36px;
 }
+.text-sm{
+  font-size: 14px;
+}
 .font-bold{
   font-weight: 700;
 }

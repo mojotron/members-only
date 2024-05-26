@@ -19,6 +19,7 @@ app.set('view engine', 'ejs');
 //
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 // session and auth strategy
 app.use(
   session({
