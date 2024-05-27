@@ -19,7 +19,7 @@
             <input type="text" name="username" id="username" class="bg-gray-100 outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-300"/>
           </div>
           <% if (errors.username) { %>
-            <p class="text-red-500 text-center"><%= errors.username %></p>
+            <p class="text-red-500 text-sm"><%= errors.username %></p>
           <% } %>
         </div>
       </div>
@@ -30,7 +30,7 @@
           <input type="password" name="password" id="password" class="bg-gray-100 outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-300"/>
         </div>
         <% if (errors.password) { %>
-          <p><%= errors.password %></p>
+          <p class="text-red-500 text-sm"><%= errors.password %></p>
         <% } %>
       </div>
 

@@ -60,4 +60,6 @@ const createUserValidation = {
   },
 };
 
-export default createUserValidation;
+const createLoginValidation = {};
+
+export { createUserValidation, createLoginValidation };

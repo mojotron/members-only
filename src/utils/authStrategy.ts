@@ -1,3 +1,4 @@
+import { Express } from 'express';
 import passport from 'passport';
 import { Strategy } from 'passport-local';
 import User from '../models/user';
@@ -10,23 +11,24 @@ passport.use(
       if (user === null) throw new Error(`no user with ${username} username`);
       const validPassword = await comparePasswords(password, user.password);
       if (validPassword === false) throw new Error('invalid user password');
-      return done(false, user);
+      done(false, user);
     } catch (error) {
-      return done(error, false);
+      done(error, false);
     }
   }),
 );
 
 passport.serializeUser((user, done) => {
-  return done(false, user); // TODO set id
+  const { _id } = user as Express.User & { _id: string };
+  done(false, _id);
 });
 
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await User.findById(id);
     if (user === null) throw new Error(`unknown user with id: ${id}`);
-    return done(false, user);
+    done(false, { username: user.username, userId: user._id });
   } catch (error) {
-    return done(error, false);
+    done(error, false);
   }
 });

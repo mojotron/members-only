@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
 import { validationResult, FieldValidationError } from 'express-validator';
 import User from '../models/user';
@@ -26,8 +26,6 @@ const registerPost = asyncHandler(async (req: Request, res: Response) => {
   const checkUser = await User.findOne({ username });
 
   if (!errors.isEmpty() || !equalPasswords || checkUser !== null) {
-    console.log('BUG?');
-
     const errorsObj: { [key: string]: string } = {};
     errors.array().forEach(err => {
       const { path, msg } = err as FieldValidationError;
@@ -54,6 +52,7 @@ const registerPost = asyncHandler(async (req: Request, res: Response) => {
   }
 
   const hashedPassword = await generatePassword(password);
+
   const newUser = new User({
     firstName,
     lastName,
@@ -69,13 +68,29 @@ const registerPost = asyncHandler(async (req: Request, res: Response) => {
 const loginGet = (req: Request, res: Response) => {
   res.status(200).render('pages/login', {
     errors: {},
+    inputValues: {
+      username: '',
+      password: '',
+    },
   });
 };
 
-const loginPost = (req: Request, res: Response, next: NextFunction) => {
-  res.status(200).render('pages/login');
+const loginPost = (req: Request, res: Response) => {
+  req.sessionStore.get(req.sessionID, (err, session) => {
+    console.log(session);
+  });
+  // TODO redirect to dashboard
+  res.send('done');
 };
 
-const logout = () => {};
+const logout = (req: Request, res: Response, next: NextFunction) => {
+  if (req.isAuthenticated()) {
+    req.logout(err => {
+      if (err) return next(err);
+      return res.status(200).redirect('/login');
+    });
+  }
+  return res.status(200).redirect('/login');
+};
 
 export { registerGet, registerPost, loginGet, loginPost, logout };
