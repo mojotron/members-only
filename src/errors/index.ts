@@ -1,5 +1,6 @@
 import CustomApiError from './CustomApiError';
 import BadRequestError from './BadRequestError';
-import UnathorizeError from './UnauthorizeError';
+import UnauthorizeError from './UnauthorizeError';
+import LoginError from './LoginError';
 
-export { CustomApiError, BadRequestError, UnathorizeError };
+export { CustomApiError, BadRequestError, UnauthorizeError, LoginError };

@@ -6,6 +6,7 @@ import {
   registerPost,
   loginGet,
   loginPost,
+  validateLogin,
   logout,
 } from '../controllers/auth';
 import {
@@ -22,7 +23,13 @@ router.get('/', (req, res) => {
 router.get('/register', registerGet);
 router.post('/register', checkSchema(createUserValidation), registerPost);
 router.get('/login', loginGet);
-router.post('/login', passport.authenticate('local'), loginPost);
+router.post(
+  '/login',
+  checkSchema(createLoginValidation),
+  validateLogin,
+  passport.authenticate('local'),
+  loginPost,
+);
 router.post('/logout', logout);
 
 router.get('/status', (req, res) => {

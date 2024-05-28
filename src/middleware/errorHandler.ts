@@ -2,6 +2,7 @@
 
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import { LoginError } from '../errors/index';
 
 const errorHandlerMiddleware = (
   err: Error,
@@ -9,7 +10,12 @@ const errorHandlerMiddleware = (
   res: Response,
   next: NextFunction,
 ) => {
-  console.log(err);
+  if (err instanceof LoginError) {
+    return res.status(err.statusCode).render('pages/login', {
+      errors: err.errorObject,
+      inputValues: err.inputValues,
+    });
+  }
 
   return res.status(StatusCodes.INTERNAL_SERVER_ERROR).render('pages/error', {
     statusCode: 'Internal Server Error',
