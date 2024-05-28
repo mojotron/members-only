@@ -9,7 +9,6 @@
   <body
     class="px-8 py-16 flex flex-col gap-8 items-center bg-gray-100 text-gray-600 font-sans"
   >
-  <%- include('../partials/header', {loginBtn: false}) %>
 
     <form action="/new-message" method="post" class="flex flex-col items-center gap-3">
       <div class="space-y-3">
@@ -38,6 +37,7 @@
     <button type="submit" class="mt-8 px-4 py-2 font-display font-bold text-md bg-green-500 text-gray-100 border border-gray-100 hover:border-green-500 hover:bg-gray-100 hover:text-green-500">create message</button>
     </form>
     
+    <%- include('../partials/footer') %>
 
   </body>
 </html>

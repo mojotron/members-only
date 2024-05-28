@@ -104,8 +104,17 @@ const loginPost = (req: Request, res: Response) => {
   req.sessionStore.get(req.sessionID, (err, session) => {
     console.log(session);
   });
-  // TODO redirect to dashboard
-  res.send('AUTH DONE');
+
+  if (req.isAuthenticated()) {
+    return res.status(200).redirect('/dashboard');
+  }
+  return res.status(200).render('pages/login', {
+    errors: {},
+    inputValues: {
+      username: '',
+      password: '',
+    },
+  });
 };
 
 const logout = (req: Request, res: Response, next: NextFunction) => {

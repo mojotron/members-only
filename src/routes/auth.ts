@@ -12,7 +12,7 @@ import {
 import {
   createUserValidation,
   createLoginValidation,
-} from '../utils/validatorsConfig';
+} from '../validators/index';
 
 const router = express.Router();
 
