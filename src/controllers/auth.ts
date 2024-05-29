@@ -30,7 +30,7 @@ const registerPost = asyncHandler(async (req: Request, res: Response) => {
     const errorsObj: { [key: string]: string } = {};
     errors.array().forEach(err => {
       const { path, msg } = err as FieldValidationError;
-      errorsObj[path] = msg;
+      if (errorsObj[path] === undefined) errorsObj[path] = msg;
     });
 
     if (!equalPasswords)
@@ -83,7 +83,7 @@ const validateLogin = (req: Request, res: Response, next: NextFunction) => {
       const errorsObj: { [key: string]: string } = {};
       errors.array().forEach(err => {
         const { path, msg } = err as FieldValidationError;
-        errorsObj[path] = msg;
+        if (errorsObj[path] === undefined) errorsObj[path] = msg;
       });
 
       const { username, password } = req.body;
