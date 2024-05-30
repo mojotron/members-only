@@ -16,11 +16,10 @@ const getDashboard = asyncHandler(
         createdBy: userId,
       }).exec();
 
-      const stories = getCurrentUserStories.map(story => {
-        const { title, body, _id, createdAt } = story;
-        return { title, body, storyId: _id, createdAt: timeFormat(createdAt) };
+      const stories = getCurrentUserStories.map(storyEle => {
+        const { title, story, _id, createdAt } = storyEle;
+        return { title, story, storyId: _id, createdAt: timeFormat(createdAt) };
       });
-      console.log(getCurrentUserStories);
 
       return res.status(200).render('pages/dashboard', {
         stories,
@@ -47,15 +46,19 @@ const postNewStory = asyncHandler(
           if (errorsObj[path] === undefined) errorsObj[path] = msg;
         });
 
-        return res
-          .status(200)
-          .render('pages/story-form', { errors: {}, inputValues: {} });
+        return res.status(200).render('pages/story-form', {
+          errors: errorsObj,
+          inputValues: {
+            title: req.body.title,
+            story: req.body.body,
+          },
+        });
       }
 
-      const { title, body } = matchedData(req);
+      const { title, story } = matchedData(req);
       const { userId } = req.user as { userId: string };
 
-      const newStory = new Story({ title, body, createdBy: userId });
+      const newStory = new Story({ title, story, createdBy: userId });
       await newStory.save();
 
       return res.status(200).redirect('/dashboard');
@@ -65,13 +68,44 @@ const postNewStory = asyncHandler(
   },
 );
 
-const getEditStory = () => {};
+const getEditStory = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {},
+);
 
 const postEditStory = () => {};
 
-const getDeleteStory = () => {};
+const getDeleteStory = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { storyId } = req.params;
+      const story = await Story.findById(storyId).exec();
 
-const postDeleteStory = () => {};
+      if (story === null) {
+        throw new Error('could not find story');
+      }
+      return res
+        .status(200)
+        .render('pages/confirm-delete', { storyTitle: story.title, storyId });
+    } catch (error) {
+      return next(error);
+    }
+  },
+);
+
+const postDeleteStory = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { storyId } = req.params;
+      const deletedStory = await Story.findByIdAndDelete(storyId);
+      if (deletedStory === null) {
+        throw new Error('could not delete story');
+      }
+      return res.status(200).redirect('/dashboard');
+    } catch (error) {
+      return next(error);
+    }
+  },
+);
 
 export {
   getDashboard,

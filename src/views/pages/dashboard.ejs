@@ -26,7 +26,7 @@
               <h3 class="font-display font-bold text-lg"><%= stories[i].title%></h3>
               <span><%= stories[i].createdAt%></span>
               <a href="">edit</a>
-              <a href="">delete</a>
+              <a href="/dashboard/delete/<%= stories[i].storyId %>">delete</a>
             </header>
             <p><%= stories[i].body%></p>
           </div>

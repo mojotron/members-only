@@ -13,16 +13,16 @@ const createStoryValidator = {
     trim: true,
     escape: true,
   },
-  body: {
+  story: {
     notEmpty: {
-      errorMessage: 'story body must not be empty',
+      errorMessage: 'story story must not be empty',
     },
     isString: {
-      errorMessage: 'story body must be string',
+      errorMessage: 'story story must be string',
     },
     isLength: {
       options: { min: 10, max: 500 },
-      errorMessage: 'story body must be between 5 and 500 characters',
+      errorMessage: 'story story must be between 5 and 500 characters',
     },
     trim: true,
     escape: true,

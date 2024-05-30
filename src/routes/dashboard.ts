@@ -18,4 +18,7 @@ router.get('/', getDashboard);
 router.get('/new-story', getNewStory);
 router.post('/new-story', checkSchema(createStoryValidator), postNewStory);
 
+router.get('/delete/:storyId', getDeleteStory);
+router.post('/delete/:storyId', postDeleteStory);
+
 export default router;

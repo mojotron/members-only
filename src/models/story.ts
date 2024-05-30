@@ -7,7 +7,7 @@ const storySchema = new mongoose.Schema({
     maxLength: 50,
     required: [true, 'story title is required'],
   },
-  body: {
+  story: {
     type: String,
     minLength: 10,
     maxLength: 500,
