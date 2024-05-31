@@ -25,10 +25,10 @@
             <header>
               <h3 class="font-display font-bold text-lg"><%= stories[i].title%></h3>
               <span><%= stories[i].createdAt%></span>
-              <a href="">edit</a>
+              <a href="/dashboard/edit/<%= stories[i].storyId %>">edit</a>
               <a href="/dashboard/delete/<%= stories[i].storyId %>">delete</a>
             </header>
-            <p><%= stories[i].body%></p>
+            <p><%= stories[i].story %></p>
           </div>
         <% }%>
         </section>
