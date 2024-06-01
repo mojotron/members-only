@@ -2,7 +2,7 @@
 
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { LoginError } from '../errors/index';
+import { LoginError, StoryNotExists } from '../errors/index';
 
 const errorHandlerMiddleware = (
   err: Error,
@@ -15,6 +15,12 @@ const errorHandlerMiddleware = (
       errors: err.errorObject,
       inputValues: err.inputValues,
     });
+  }
+
+  if (err instanceof StoryNotExists) {
+    return res
+      .status(err.statusCode)
+      .render('pages/error', { statusCode: err.statusCode, msg: err.message });
   }
 
   return res.status(StatusCodes.INTERNAL_SERVER_ERROR).render('pages/error', {
