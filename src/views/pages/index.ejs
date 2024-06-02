@@ -9,7 +9,13 @@
   <body
     class="px-8 pt-16 pb-8 min-h-[100vh] flex flex-col items-center bg-gray-100 text-gray-600 font-sans"
   >
-    <%- include('../partials/header', {loginBtn: true}) %>
+    <%- include('../partials/header', {isAuth}) %>
+
+    <% if(isAuth === false) {%>
+      <%- include('../partials/page-info') %>
+    <% } else { %>
+      <%- include('../partials/stories', {stories}) %>
+    <% } %>
 
     <%- include('../partials/footer') %>
 

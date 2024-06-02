@@ -1,0 +1,10 @@
+<!-- story: Story -->
+<div class="p-4 flex flex-col gap-4 border border-gray-300 rounded-sm">
+  <header>
+    <h3 class="font-display font-bold text-lg"><%= story.title%></h3>
+    <span><%= story.createdAt%></span>
+    <a href="/dashboard/edit/<%= story.storyId %>">edit</a>
+    <a href="/dashboard/delete/<%= story.storyId %>">delete</a>
+  </header>
+  <p><%= story.story %></p>
+</div>

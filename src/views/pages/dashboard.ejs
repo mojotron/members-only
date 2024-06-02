@@ -9,30 +9,16 @@
   <body
     class="px-8 pt-16 pb-8 min-h-[100vh] flex flex-col items-center bg-gray-100 text-gray-600 font-sans"
   >
-    <header>
-      <nav>
-        <ul class="flex gap-4">
-          <li><a href="/stories">stories</a></li>
-          <li><a href="/logout">logout</a></li>
-        </ul>
-      </nav>
-    </header>
+  <%- include('../partials/header', {isAuth}) %>
 
-    <main>
+    <main class="relative">
+      <a href="/dashboard/new-story" class="border border-green-500 absolute top-0 right-0">create story</a>
       <section class="flex flex-col gap-2">
-        <% for(var i=0; i < stories.length; i += 1) {%>
-          <div class="p-4 flex flex-col gap-4 border border-gray-300 rounded-sm">
-            <header>
-              <h3 class="font-display font-bold text-lg"><%= stories[i].title%></h3>
-              <span><%= stories[i].createdAt%></span>
-              <a href="/dashboard/edit/<%= stories[i].storyId %>">edit</a>
-              <a href="/dashboard/delete/<%= stories[i].storyId %>">delete</a>
-            </header>
-            <p><%= stories[i].story %></p>
-          </div>
+
+        <% for(let i=0; i < stories.length; i += 1) {%>
+          <%- include("../partials/story", {story: stories[i]}) %>
         <% }%>
         </section>
-      <a href="/dashboard/new-story">create story</a>
     </main>
 
     <%- include('../partials/footer') %>

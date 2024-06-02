@@ -1,0 +1,15 @@
+<!-- {stories: Story[]} -->
+<section>
+  <form action="/" method="post">
+    <label>search</label>
+    <input type="search" class="border border-gray-400" />
+    <button type="submit">▶️</button>
+  </form>
+  <div>
+    <ul>
+      <% for(let i = 0; i < stories.length; i += 1 ) { %>
+        <p>story</p>
+      <% } %>
+    </ul>
+  </div>
+</section>

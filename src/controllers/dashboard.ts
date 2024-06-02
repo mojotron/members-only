@@ -21,6 +21,7 @@ const getDashboard = asyncHandler(
 
       return res.status(StatusCodes.OK).render('pages/dashboard', {
         stories,
+        isAuth: req.isAuthenticated(),
       });
     } catch (error) {
       return next(error);

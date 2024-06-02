@@ -106,7 +106,7 @@ const loginPost = (req: Request, res: Response) => {
   });
 
   if (req.isAuthenticated()) {
-    return res.status(200).redirect('/dashboard');
+    return res.status(200).redirect('/');
   }
   return res.status(200).render('pages/login', {
     errors: {},

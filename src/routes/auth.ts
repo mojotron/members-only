@@ -30,7 +30,7 @@ router.post(
   passport.authenticate('local'),
   loginPost,
 );
-router.post('/logout', logout);
+router.get('/logout', logout);
 
 router.get('/status', (req, res) => {
   res.status(200).json({ user: req.user });

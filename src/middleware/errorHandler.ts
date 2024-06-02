@@ -10,6 +10,8 @@ const errorHandlerMiddleware = (
   res: Response,
   next: NextFunction,
 ) => {
+  console.log(err);
+
   if (err instanceof LoginError) {
     return res.status(err.statusCode).render('pages/login', {
       errors: err.errorObject,
