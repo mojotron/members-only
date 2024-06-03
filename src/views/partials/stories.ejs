@@ -8,7 +8,7 @@
   <div>
     <ul>
       <% for(let i = 0; i < stories.length; i += 1 ) { %>
-        <p>story</p>
+        <%- include("../partials/story", {story: stories[i]}) %>
       <% } %>
     </ul>
   </div>

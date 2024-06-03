@@ -5,6 +5,7 @@ module.exports = {
     fontFamily: {
       sans: ['Nunito', 'sans-serif'],
       display: ['Archivo Black', 'serif'],
+      typewriter: ['Special Elite', 'monospace'],
     },
     fontSize: {
       xs: '12px',
@@ -24,6 +25,7 @@ module.exports = {
         400: '#a8a29e',
         600: '#57534e',
         800: '#27272a',
+        900: '#2d2321',
       },
       red: {
         500: '#f43f5e',
@@ -31,6 +33,9 @@ module.exports = {
       green: {
         300: '#86efac',
         500: '#22c55e',
+      },
+      paper: {
+        400: '#e4ddd7',
       },
     },
     extend: {},

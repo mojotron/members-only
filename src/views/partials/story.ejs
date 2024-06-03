@@ -1,10 +1,28 @@
 <!-- story: Story -->
-<div class="p-4 flex flex-col gap-4 border border-gray-300 rounded-sm">
-  <header>
-    <h3 class="font-display font-bold text-lg"><%= story.title%></h3>
-    <span><%= story.createdAt%></span>
-    <a href="/dashboard/edit/<%= story.storyId %>">edit</a>
-    <a href="/dashboard/delete/<%= story.storyId %>">delete</a>
+<article
+  class="py-8 px-6 flex flex-col gap-4 border border-gray-400 rounded-sm font-typewriter bg-paper-400"
+>
+  <header class="flex items-center justify-between gap-8">
+    <h3 class="font-bold text-gray-600 text-2xl uppercase">
+      <%= story.title%>
+    </h3>
+    <div class="flex flex-col items-center justify-between">
+      <span class="text-gray-400 text-sm"><%= story.createdAt%></span>
+      <div class="flex items-center gap-4">
+        <a
+          class="text-gray-600 hover:text-gray-400 hover:underline"
+          href="/dashboard/edit/<%= story.storyId %>"
+          >edit</a
+        >
+        <a
+          class="text-gray-600 hover:text-red-500 hover:underline"
+          href="/dashboard/delete/<%= story.storyId %>"
+          >delete</a
+        >
+      </div>
+    </div>
   </header>
-  <p><%= story.story %></p>
-</div>
+  <p class="first-letter:uppercase first-letter:text-2xl text-gray-600">
+    <%= story.story %>
+  </p>
+</article>
