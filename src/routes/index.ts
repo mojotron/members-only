@@ -1,12 +1,11 @@
 import { Router } from 'express';
-import { latestStories, filterStories } from '../controllers/index';
+import getStories from '../controllers/index';
 import authRoutes from './auth';
 import dashboardRoutes from './dashboard';
 
 const router = Router();
 
-router.get('/', latestStories);
-router.post('/', filterStories);
+router.get('/', getStories);
 
 router.use(authRoutes);
 router.use('/dashboard', dashboardRoutes);

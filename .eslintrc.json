@@ -22,7 +22,8 @@
     "no-console": "off",
     "import/extensions": "off",
     "import/no-extraneous-dependencies": "off",
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "no-undef": "warn"
   },
   "settings": {
     "import/parser": {
