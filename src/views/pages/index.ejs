@@ -18,7 +18,7 @@
       <section>
         <form id="search-form">
           <label for="search-bar">search</label>
-          <input id="search-bar" type="search" class="border border-gray-400" />
+          <input value="<%= searchTerm %>" id="search-bar" type="search" class="border border-gray-400" />
           <button type="submit">▶️</button>
         </form>
         <div>
@@ -27,6 +27,13 @@
               <%- include("../partials/story", {story: stories[i]}) %>
             <% } %>
           </ul>
+          <% if(page > 1) { %>
+            <button id="btn-prev-page" data-current-page="<%= page %>" data-direction="prev">prev page</button>
+          <% } %>
+
+          <% if(hasNext) { %>
+            <button id="btn-next-page" data-current-page="<%= page %>" data-direction="next">next page</button>
+          <% } %>
         </div>
       </section>
     <% } %>
