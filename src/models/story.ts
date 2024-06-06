@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
+import StoryType from '../types/storyType';
+import timeFormat from '../utils/timeFormat';
 
-const storySchema = new mongoose.Schema({
+const storySchema = new mongoose.Schema<StoryType>({
   title: {
     type: String,
     minLength: 5,
@@ -24,4 +26,8 @@ const storySchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model('Story', storySchema);
+storySchema.virtual('formattedDate').get(function () {
+  return timeFormat(this.createdAt);
+});
+
+export default mongoose.model<StoryType>('Story', storySchema);

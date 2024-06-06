@@ -23,7 +23,8 @@
     "import/extensions": "off",
     "import/no-extraneous-dependencies": "off",
     "no-underscore-dangle": "off",
-    "no-undef": "warn"
+    "no-undef": "warn",
+    "no-restricted-globals": "warn"
   },
   "settings": {
     "import/parser": {

@@ -25,6 +25,11 @@ const userSchema = new mongoose.Schema({
     minLength: 6,
     required: [true, 'please provide password value'],
   },
+  isMember: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 });
 
 export default mongoose.model('User', userSchema);
