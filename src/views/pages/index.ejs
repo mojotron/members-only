@@ -8,37 +8,42 @@
     <title>Members Only | learn session auth basics</title>
   </head>
   <body
-    class="px-8 pt-16 pb-8 min-h-[100vh] flex flex-col items-center bg-gray-100 text-gray-600 font-sans"
+    class=" w-full min-h-[100vh] flex justify-center"
   >
-    <%- include('../partials/header', {isAuth}) %>
+    <main class="flex flex-col justify-center items-center px-8 pt-16 pb-8 w-full md:w-[800px]">
+      <%- include('../partials/header', {isAuth}) %>
+  
+      <% if(isAuth === false) {%>
+        <%- include('../partials/page-info') %>
+      <% } else { %>
+        <section class="flex flex-col items-center gap-6">
+          <form id="search-form flex items-center gap-4">
+            <input class="border border-gray-400 py-0.5 px-2 font-typewriter text-gray-900 focus:bg-gray-300 focus:ring focus:ring-gray-800 outline-none" value="<%= searchTerm %>" id="search-bar" type="search"  title="search for word in title or stroy body" placeholder="search" />
+            <button class="text-xl text-gray-600 hover:text-gray-900" type="submit">&#11166;</button>
+          </form>
+          <div>
+            <ul>
+              <% for(let i = 0; i < stories.length; i += 1 ) { %>
+                <%- include("../partials/story", {story: stories[i]}) %>
+              <% } %>
+            </ul>
+            <div class="relative font-typewriter">
+              <% if(page > 1) { %>
+                <button class="absolute left-0 px-2 py-0.5 hover:underline hover:bg-gray-600 hover:text-gray-100" id="btn-prev-page" data-current-page="<%= page %>" data-direction="prev">prev page</button>
+              <% } %>
+    
+              <% if(hasNext) { %>
+                <button class="absolute right-0 px-2 py-0.5 hover:underline hover:bg-gray-600 hover:text-gray-100" id="btn-next-page" data-current-page="<%= page %>" data-direction="next">next page</button>
+              <% } %>
 
-    <% if(isAuth === false) {%>
-      <%- include('../partials/page-info') %>
-    <% } else { %>
-      <section>
-        <form id="search-form">
-          <label for="search-bar">search</label>
-          <input value="<%= searchTerm %>" id="search-bar" type="search" class="border border-gray-400" />
-          <button type="submit">▶️</button>
-        </form>
-        <div>
-          <ul>
-            <% for(let i = 0; i < stories.length; i += 1 ) { %>
-              <%- include("../partials/story", {story: stories[i]}) %>
-            <% } %>
-          </ul>
-          <% if(page > 1) { %>
-            <button id="btn-prev-page" data-current-page="<%= page %>" data-direction="prev">prev page</button>
-          <% } %>
+            </div>
+          </div>
+        </section>
+      <% } %>
+  
+      <%- include('../partials/footer') %>
 
-          <% if(hasNext) { %>
-            <button id="btn-next-page" data-current-page="<%= page %>" data-direction="next">next page</button>
-          <% } %>
-        </div>
-      </section>
-    <% } %>
-
-    <%- include('../partials/footer') %>
+    </main>
 
   </body>
 </html>

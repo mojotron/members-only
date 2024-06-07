@@ -35,8 +35,6 @@ const getStories = asyncHandler(
 
       const fullLimit = stories.length === QUERY_LIMIT;
 
-      console.log(stories);
-
       const modifiedStories = stories.map(storyEle => {
         const { title, story, _id, createdAt } = storyEle;
         return { title, story, storyId: _id, createdAt: timeFormat(createdAt) };

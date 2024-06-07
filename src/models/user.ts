@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
+import UserType from '../types/userType';
 
-const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema<UserType>({
   firstName: {
     type: String,
     minLength: 3,
@@ -32,4 +33,4 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model('User', userSchema);
+export default mongoose.model<UserType>('User', userSchema);
