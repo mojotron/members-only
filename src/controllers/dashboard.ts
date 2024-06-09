@@ -14,6 +14,8 @@ const getDashboard = asyncHandler(
         createdBy: userId,
       }).exec();
 
+      const { username } = req.user as { username: string };
+
       const stories = getCurrentUserStories.map(storyEle => {
         const { title, story, _id, createdAt } = storyEle;
         return { title, story, storyId: _id, createdAt: timeFormat(createdAt) };
@@ -22,6 +24,7 @@ const getDashboard = asyncHandler(
       return res.status(StatusCodes.OK).render('pages/dashboard', {
         stories,
         isAuth: req.isAuthenticated(),
+        username,
       });
     } catch (error) {
       return next(error);
@@ -34,6 +37,7 @@ const getNewStory = (req: Request, res: Response) => {
     errors: {},
     inputValues: {},
     btnText: 'create',
+    title: 'Create New Story',
   });
 };
 
@@ -70,6 +74,7 @@ const getEditStory = asyncHandler(
           story: storyDoc.story,
         },
         btnText: 'edit',
+        title: 'Update Story',
       });
     } catch (error) {
       return next(error);

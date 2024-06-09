@@ -11,10 +11,13 @@
   >
   <%- include('../partials/header', {isAuth}) %>
 
-    <main class="relative">
-      <a href="/dashboard/new-story" class="border border-green-500 absolute top-0 right-0">create story</a>
-      <section class="flex flex-col gap-2">
+    <main class="flex flex-col gap-3">
+      <section class="flex items-center justify-between gap-4">
+        <h3 class="font-typewriter font-bold text-lg"> Welcome <span class="border-b-2 border-green-500"><%= username %></span></h3>
+        <a href="/dashboard/new-story" class="px-4 py-2 font-typewriter font-bold text-md bg-green-500 text-gray-100 border border-gray-100 hover:border-green-500 hover:bg-gray-100 hover:text-green-500">create story</a>
+      </section>
 
+      <section class="flex flex-col gap-4 py-8">
         <% for(let i=0; i < stories.length; i += 1) {%>
           <%- include("../partials/story", {story: stories[i]}) %>
         <% }%>

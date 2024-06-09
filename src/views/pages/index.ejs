@@ -17,9 +17,9 @@
         <%- include('../partials/page-info') %>
       <% } else { %>
         <section class="flex flex-col items-center gap-6">
-          <form id="search-form flex items-center gap-4">
+          <form id="search-form" class="flex items-center gap-4">
             
-              <label class="font-typewriter text-gray-600" for="search-bar" id="search-bar" type="search"  title="search for word in title or stroy body" placeholder="search">search for</label>
+              <label class="font-typewriter text-gray-600" for="search-bar" >search for</label>
 
               <input value="<%= searchTerm %>" type="search" name="search-bar" id="search-bar" placeholder="term" class="font-typewriter bg-gray-100 outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-300"/>
             

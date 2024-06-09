@@ -32,8 +32,4 @@ router.post(
 );
 router.get('/logout', logout);
 
-router.get('/status', (req, res) => {
-  res.status(200).json({ user: req.user });
-});
-
 export default router;

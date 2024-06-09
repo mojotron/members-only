@@ -118,13 +118,12 @@ const loginPost = (req: Request, res: Response) => {
 };
 
 const logout = (req: Request, res: Response, next: NextFunction) => {
-  if (req.isAuthenticated()) {
-    req.logout(err => {
-      if (err) return next(err);
-      return res.status(200).redirect('/login');
-    });
-  }
-  return res.status(200).redirect('/login');
+  req.logout(err => {
+    if (err) {
+      return next(err);
+    }
+    return res.redirect('/login');
+  });
 };
 
 export {

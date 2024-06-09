@@ -21,8 +21,9 @@ const validateResultsStory = (
       inputValues: {
         title: req.body.title,
         story: req.body.story,
-        btnText: req.url.includes('create') ? 'create' : 'edit',
       },
+      btnText: req.url.includes('create') ? 'create' : 'edit',
+      title: req.url.includes('create') ? 'Create New Story' : 'Update Story',
     });
   }
 

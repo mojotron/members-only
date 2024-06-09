@@ -23,6 +23,7 @@ const handleChangePage = e => {
 
 searchFormEle.addEventListener('submit', e => {
   e.preventDefault();
+  console.log(searchInputEle.value);
   setQueryParamsAndRefresh(searchInputEle.value, 1);
 });
 
