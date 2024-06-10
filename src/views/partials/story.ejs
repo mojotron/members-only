@@ -16,16 +16,18 @@
           href="/story/<%= story.storyId %>"
           >details</a
         >
-        <a
-          class="text-gray-600 hover:text-gray-400 hover:underline"
-          href="/dashboard/edit/<%= story.storyId %>"
-          >edit</a
-        >
-        <a
-          class="text-gray-600 hover:text-red-500 hover:underline"
-          href="/dashboard/delete/<%= story.storyId %>"
-          >delete</a
-        >
+        <% if (createdByCurrentUser) { %>
+          <a
+            class="text-gray-600 hover:text-gray-400 hover:underline"
+            href="/dashboard/edit/<%= story.storyId %>"
+            >edit</a
+          >
+          <a
+            class="text-gray-600 hover:text-red-500 hover:underline"
+            href="/dashboard/delete/<%= story.storyId %>"
+            >delete</a
+          >
+        <% } %>
       </div>
     </div>
   </header>

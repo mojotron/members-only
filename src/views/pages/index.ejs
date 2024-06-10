@@ -28,7 +28,7 @@
           <div>
             <ul>
               <% for(let i = 0; i < stories.length; i += 1 ) { %>
-                <%- include("../partials/story", {story: stories[i]}) %>
+                <%- include("../partials/story", {story: stories[i], createdByCurrentUser: stories[i].createdBy === currentUserId}) %>
               <% } %>
             </ul>
             <div class="relative font-typewriter">

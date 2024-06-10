@@ -19,7 +19,7 @@
 
       <section class="flex flex-col gap-4 py-8">
         <% for(let i=0; i < stories.length; i += 1) {%>
-          <%- include("../partials/story", {story: stories[i]}) %>
+          <%- include("../partials/story", {story: stories[i], createdByCurrentUser: true}) %>
         <% }%>
         </section>
     </main>

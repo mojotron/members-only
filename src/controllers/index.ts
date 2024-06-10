@@ -38,9 +38,18 @@ const getStories = asyncHandler(
       const fullLimit = stories.length === QUERY_LIMIT;
 
       const modifiedStories = stories.map(storyEle => {
-        const { title, story, _id, createdAt } = storyEle;
-        return { title, story, storyId: _id, createdAt: timeFormat(createdAt) };
+        const { title, story, _id, createdAt, createdBy } = storyEle;
+
+        return {
+          title,
+          story,
+          storyId: _id,
+          createdAt: timeFormat(createdAt),
+          createdBy: createdBy.toString(),
+        };
       });
+
+      const { userId } = req.user as { userId: string };
 
       return res.status(StatusCodes.OK).render('pages/index', {
         isAuth: req.isAuthenticated(),
@@ -48,6 +57,7 @@ const getStories = asyncHandler(
         hasNext: fullLimit,
         searchTerm: search || '',
         page: pageNum,
+        currentUserId: userId.toString(),
       });
     } catch (error) {
       return next(error);
