@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script defer type="module" src="/scripts/main.js"></script>
+    <title>Members Only | learn session auth basics</title>
+  </head>
+  <body
+    class=" w-full min-h-[100vh] flex justify-center"
+  >
+    <main class="flex flex-col justify-center items-center px-8 pt-16 pb-8 w-full md:w-[800px]">
+      <%- include('../partials/header', {isAuth}) %>
+  
+      <section class="py-8 px-10 flex flex-col gap-4 rounded-sm font-typewriter border-b-2 border-gray-400">
+        <header class="flex flex-col sm:flex-row items-center sm:justify-between gap-2 sm:gap-8">
+          <h2 class="font-bold text-gray-600 text-2xl uppercase"><%= story.title %></h2>
+          <h3>created by <%= author.username %></h3>
+          <span class="text-gray-400 text-sm"><%= story.createdAt%></span>
+
+          <% if (createdByCurrentUser) { %>
+            <div class="flex items-center gap-4">
+              <a
+                class="text-gray-600 hover:text-gray-400 hover:underline"
+                href="/dashboard/edit/<%= story.storyId %>"
+                >edit</a
+              >
+              <a
+                class="text-gray-600 hover:text-red-500 hover:underline"
+                href="/dashboard/delete/<%= story.storyId %>"
+                >delete</a
+              >
+            </div>
+          <% } %>
+
+        </header>
+        <div class="px-8 py-4">
+          <p class="first-letter:uppercase first-letter:text-2xl text-gray-600"><%= story.story%></p>
+        </div>
+      </section>
+      
+      <%- include('../partials/footer') %>
+    </main>
+  </body>
+</html>
