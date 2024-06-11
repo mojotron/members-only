@@ -23,9 +23,15 @@ const getStories = asyncHandler(
       }
 
       if (!req.isAuthenticated()) {
-        return res
-          .status(StatusCodes.UNAUTHORIZED)
-          .render('pages/index', { isAuth: false, stories: [] });
+        const userCount = await User.countDocuments({});
+        const storyCount = await Story.countDocuments({});
+
+        return res.status(StatusCodes.UNAUTHORIZED).render('pages/index', {
+          isAuth: false,
+          stories: [],
+          userCount,
+          storyCount,
+        });
       }
 
       const pageNum = parseInt(page as string, 10) || 1;

@@ -14,7 +14,7 @@
       <%- include('../partials/header', {isAuth}) %>
   
       <% if(isAuth === false) {%>
-        <%- include('../partials/page-info') %>
+        <%- include('../partials/page-info', {userCount, storyCount}) %>
       <% } else { %>
         <section class="flex flex-col items-center gap-6">
           <form id="search-form" class="flex items-center gap-4">

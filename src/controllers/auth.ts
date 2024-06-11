@@ -101,9 +101,9 @@ const validateLogin = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const loginPost = (req: Request, res: Response) => {
-  req.sessionStore.get(req.sessionID, (err, session) => {
-    console.log(session);
-  });
+  // req.sessionStore.get(req.sessionID, (err, session) => {
+  //   console.log(session);
+  // });
 
   if (req.isAuthenticated()) {
     return res.status(200).redirect('/');

@@ -48,7 +48,11 @@ passport.deserializeUser(async (id, done) => {
   try {
     const user = await User.findById(id);
     if (user === null) throw new Error(`unknown user with id: ${id}`);
-    done(false, { username: user.username, userId: user._id });
+    done(false, {
+      username: user.username,
+      userId: user._id,
+      isMember: user.isMember,
+    });
   } catch (error) {
     done(error, false);
   }
