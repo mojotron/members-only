@@ -28,7 +28,7 @@ router.get('/delete/:storyId', getDeleteStory);
 router.post('/delete/:storyId', postDeleteStory);
 
 router.get('/edit/:storyId', getEditStory);
-router.patch(
+router.post(
   '/edit/:storyId',
   checkSchema(createStoryValidator),
   validateResultsStory,

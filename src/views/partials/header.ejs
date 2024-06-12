@@ -14,7 +14,7 @@
             <a href="/register" class="px-4 py-2 font-typewriter font-bold text-md bg-green-500 text-gray-100 border border-gray-100 hover:border-green-500 hover:bg-gray-100 hover:text-green-500">register</a>
           </li>
         <% } else { %>
-          <% if(true) {%>
+          <% if(isMember === false) {%>
             <li>
               <a class="px-4 py-2 font-typewriter font-bold text-md bg-green-500 text-gray-100 border border-gray-100 hover:border-green-500 hover:bg-gray-100 hover:text-green-500" href="/member">became member</a>
             </li>

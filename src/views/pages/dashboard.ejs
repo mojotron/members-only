@@ -9,7 +9,7 @@
   <body
     class="px-8 pt-16 pb-8 min-h-[100vh] flex flex-col items-center bg-gray-100 text-gray-600 font-sans"
   >
-  <%- include('../partials/header', {isAuth}) %>
+  <%- include('../partials/header', {isAuth, isMember}) %>
 
     <main class="flex flex-col gap-3">
       <section class="flex items-center justify-between gap-4">
@@ -19,7 +19,7 @@
 
       <section class="flex flex-col gap-4 py-8">
         <% for(let i=0; i < stories.length; i += 1) {%>
-          <%- include("../partials/story", {story: stories[i], createdByCurrentUser: true}) %>
+          <%- include("../partials/story", {story: stories[i], createdByCurrentUser: true, isMember}) %>
         <% }%>
         </section>
     </main>

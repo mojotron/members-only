@@ -12,6 +12,7 @@ const getStories = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { search, page } = req.query;
+      const { isMember } = req.user as { isMember: boolean };
       let queryObject = {};
 
       if (search !== undefined) {
@@ -28,6 +29,7 @@ const getStories = asyncHandler(
 
         return res.status(StatusCodes.UNAUTHORIZED).render('pages/index', {
           isAuth: false,
+          isMember,
           stories: [],
           userCount,
           storyCount,
@@ -59,6 +61,7 @@ const getStories = asyncHandler(
 
       return res.status(StatusCodes.OK).render('pages/index', {
         isAuth: req.isAuthenticated(),
+        isMember,
         stories: modifiedStories,
         hasNext: fullLimit,
         searchTerm: search || '',
@@ -87,7 +90,10 @@ const getStoryDetails = asyncHandler(
         throw new BadRequestError(`could not find author of current post`);
       }
 
-      const { userId } = req.user as { userId: string };
+      const { userId, isMember } = req.user as {
+        userId: string;
+        isMember: boolean;
+      };
 
       return res.status(StatusCodes.OK).render('pages/story-details', {
         story: {
@@ -98,6 +104,7 @@ const getStoryDetails = asyncHandler(
         },
         author: { username: author.username },
         isAuth: req.isAuthenticated(),
+        isMember,
         createdByCurrentUser: userId.toString() === author._id.toString(),
       });
     } catch (error) {

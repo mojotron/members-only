@@ -9,7 +9,10 @@ import { StoryNotExists } from '../errors/index';
 const getDashboard = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { userId } = req.user as { userId: string };
+      const { userId, isMember } = req.user as {
+        userId: string;
+        isMember: boolean;
+      };
       const getCurrentUserStories = await Story.find({
         createdBy: userId,
       }).exec();
@@ -24,6 +27,7 @@ const getDashboard = asyncHandler(
       return res.status(StatusCodes.OK).render('pages/dashboard', {
         stories,
         isAuth: req.isAuthenticated(),
+        isMember,
         username,
       });
     } catch (error) {
@@ -61,6 +65,8 @@ const postNewStory = asyncHandler(
 const getEditStory = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
+      console.log('EDIT GET');
+
       const { storyId } = req.params;
       const storyDoc = await Story.findById(storyId).exec();
 
@@ -85,18 +91,19 @@ const getEditStory = asyncHandler(
 const postEditStory = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      // input validation in middlewares
+      //  input validation in middlewares
       const { storyId } = req.params;
+
       const { title, story } = matchedData(req);
-      const storyDoc = await Story.updateOne(
-        { _id: storyId },
-        { $set: { title, story } },
-      ).exec();
+
+      const storyDoc = await Story.findByIdAndUpdate(
+        storyId,
+        { title, story },
+        { new: true },
+      );
 
       if (storyDoc === null)
         throw new StoryNotExists(`no story with id: ${storyId}`);
-
-      await Story.deleteOne({ _id: storyId, title, story });
 
       return res.status(StatusCodes.OK).redirect('/dashboard');
     } catch (error) {

@@ -11,11 +11,14 @@
     <div class="flex flex-col items-center justify-between">
       <span class="text-gray-400 text-sm"><%= story.createdAt%></span>
       <div class="flex items-center gap-4">
-        <a
-          class="text-gray-600 hover:text-gray-400 hover:underline"
-          href="/story/<%= story.storyId %>"
-          >details</a
-        >
+        <% if (createdByCurrentUser || isMember) { %>
+          <a
+            class="text-gray-600 hover:text-gray-400 hover:underline"
+            href="/story/<%= story.storyId %>"
+            >details</a
+          >
+        <% } %>
+        
         <% if (createdByCurrentUser) { %>
           <a
             class="text-gray-600 hover:text-gray-400 hover:underline"

@@ -8,6 +8,7 @@ const validateResultsStory = (
   next: NextFunction,
 ) => {
   const results = validationResult(req);
+
   if (!results.isEmpty()) {
     const errorObj: { [key: string]: string } = {};
 
