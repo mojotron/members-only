@@ -12,7 +12,7 @@ const storySchema = new mongoose.Schema<StoryType>({
   story: {
     type: String,
     minLength: 10,
-    maxLength: 500,
+    maxLength: 1000,
     required: [true, 'story body is required'],
   },
   createdBy: {

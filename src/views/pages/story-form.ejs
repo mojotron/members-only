@@ -11,39 +11,39 @@
   >
     <main class="flex flex-col justify-center items-center px-8 pt-16 pb-8 w-full md:w-[800px]">
 
-    <h2 class="font-typewriter text-2xl text-gray-600 mb-8"><%= title %></h2>
+      <h2 class="font-typewriter text-2xl text-gray-600 mb-8"><%= title %></h2>
 
-    <form action="" method="post" class="w-full flex flex-col items-center gap-3">
-      <div class="space-y-3">
-        <div>
-          <div class="flex flex-col gap-2 text-md">
-            <label class="font-typewriter text-gray-600" for="title">title</label>
-            <input value="<%= inputValues.title %>" type="text" name="title" id="title" class="w-full font-typewriter bg-gray-100 outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-300">
+      <form action="" method="post" class="w-full flex flex-col items-center gap-3">
+        <div class="w-full space-y-3">
+          <div class="w-full">
+            <div class="flex flex-col gap-2 text-md">
+              <label class="font-typewriter text-gray-600" for="title">title</label>
+              <input value="<%= inputValues.title %>" type="text" name="title" id="title" class="font-typewriter bg-gray-100 outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-300">
+            </div>
+            <% if (errors.title) { %>
+              <p class="text-red-500 text-sm font-typewriter"><%= errors.title %></p>
+            <% } %>
           </div>
-          <% if (errors.title) { %>
-            <p class="text-red-500 text-sm font-typewriter"><%= errors.title %></p>
+        </div>
+    
+        <div class="w-full">
+          <div class="flex flex-col gap-2 text-md">
+            <label class="font-typewriter text-gray-600" for="story">story</label>
+            <textarea type="story" name="story" id="story" class="font-typewriter bg-gray-100 outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-300"><%= inputValues.story %></textarea>
+          </div>
+          <% if (errors.story) { %>
+            <p class="text-red-500 text-sm font-typewriter"><%= errors.story %></p>
           <% } %>
         </div>
-      </div>
-  
-      <div>
-        <div class="flex flex-col gap-2 text-md">
-          <label class="font-typewriter text-gray-600" for="story">story</label>
-          <textarea type="story" name="story" id="story" class="font-typewriter bg-gray-100 outline-none border-b border-gray-400 px-2 focus:ring focus:ring-green-300"><%= inputValues.story %></textarea>
+
         </div>
-        <% if (errors.story) { %>
-          <p class="text-red-500 text-sm font-typewriter"><%= errors.story %></p>
-        <% } %>
-      </div>
+      <button type="submit" class="mt-8 px-4 py-2 font-typewriter font-bold text-md bg-green-500 text-gray-100 border border-gray-100 hover:border-green-500 hover:bg-gray-100 hover:text-green-500"><%= btnText %> story</button>
+      </form>
 
-      </div>
-    <button type="submit" class="mt-8 px-4 py-2 font-typewriter font-bold text-md bg-green-500 text-gray-100 border border-gray-100 hover:border-green-500 hover:bg-gray-100 hover:text-green-500"><%= btnText %> story</button>
-    </form>
-
-    <a href="/dashboard" class="my-8 font-typewriter underline text-green-500 hover:text-gray-600">return to dashboard</a>
-    
-    <%- include('../partials/footer') %>
-  </main>
+      <a href="/dashboard" class="my-8 font-typewriter underline text-green-500 hover:text-gray-600">return to dashboard</a>
+      
+      <%- include('../partials/footer') %>
+    </main>
   </body>
 </html>
 

@@ -21,7 +21,7 @@ const createStoryValidator = {
       errorMessage: 'story story must be string',
     },
     isLength: {
-      options: { min: 10, max: 500 },
+      options: { min: 10, max: 1000 },
       errorMessage: 'story story must be between 5 and 500 characters',
     },
     trim: true,

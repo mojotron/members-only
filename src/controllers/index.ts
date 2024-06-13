@@ -12,7 +12,7 @@ const getStories = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { search, page } = req.query;
-      const { isMember } = req.user as { isMember: boolean };
+
       let queryObject = {};
 
       if (search !== undefined) {
@@ -29,7 +29,7 @@ const getStories = asyncHandler(
 
         return res.status(StatusCodes.UNAUTHORIZED).render('pages/index', {
           isAuth: false,
-          isMember,
+          isMember: false,
           stories: [],
           userCount,
           storyCount,
@@ -41,7 +41,8 @@ const getStories = asyncHandler(
 
       const stories = await Story.find(queryObject)
         .skip(skip)
-        .limit(QUERY_LIMIT);
+        .limit(QUERY_LIMIT)
+        .sort({ createdAt: 'desc' });
 
       const fullLimit = stories.length === QUERY_LIMIT;
 
@@ -57,7 +58,10 @@ const getStories = asyncHandler(
         };
       });
 
-      const { userId } = req.user as { userId: string };
+      const { userId, isMember } = req.user as {
+        userId: string;
+        isMember: boolean;
+      };
 
       return res.status(StatusCodes.OK).render('pages/index', {
         isAuth: req.isAuthenticated(),

@@ -15,7 +15,9 @@ const getDashboard = asyncHandler(
       };
       const getCurrentUserStories = await Story.find({
         createdBy: userId,
-      }).exec();
+      })
+        .sort({ createdAt: 'desc' })
+        .exec();
 
       const { username } = req.user as { username: string };
 
