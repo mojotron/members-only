@@ -21,16 +21,10 @@ const postMember = asyncHandler(
 
       const { memberCode } = req.body;
 
-      const correctCode = memberCode === 'cookie';
+      const correctCode = memberCode === process.env.MEMBER_CODE;
 
       if (correctCode) {
-        const user = await User.findByIdAndUpdate(
-          userId,
-          { isMember: true },
-          { new: true },
-        );
-
-        console.log(user);
+        await User.findByIdAndUpdate(userId, { isMember: true }, { new: true });
 
         return res
           .status(StatusCodes.OK)

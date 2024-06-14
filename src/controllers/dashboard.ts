@@ -67,8 +67,6 @@ const postNewStory = asyncHandler(
 const getEditStory = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      console.log('EDIT GET');
-
       const { storyId } = req.params;
       const storyDoc = await Story.findById(storyId).exec();
 
