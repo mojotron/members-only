@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
+    "target": "ES2016",
+    "rootDir": "./src",
     "module": "CommonJS",
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
