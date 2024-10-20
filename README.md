@@ -14,7 +14,7 @@ Project (Live Preview)[]
 - Express
 - Ejs template
 - Tailwind CSS
-- Mongo DB with Mongoose
+- PostgreSQL database
 - auth with passport, passport-local, express-session, express-validation, bcrypt
 
 ## Screenshots
