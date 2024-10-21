@@ -1,52 +1,25 @@
 {
   "name": "members-only",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "2.0.0",
+  "description": "Build an exclusive clubhouse where members can write anonymous posts. Inside the clubhouse, members can see who the author of a post is, but outside they can only see the story and wonder who wrote it.",
+  "main": "server.js",
   "scripts": {
-    "dev": "nodemon",
     "build": "tsc --build",
-    "start": "node ./dist/index.js",
-    "tailwind:css": "postcss src/public/stylesheets/tailwind.css -o src/public/stylesheets/style.css"
+    "dev": "nodemon ./src/server.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.7.7",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  },
   "dependencies": {
-    "@types/bcrypt": "^5.0.2",
-    "@types/express-session": "^1.18.0",
-    "@types/passport": "^1.0.16",
-    "@types/passport-local": "^1.0.38",
-    "bcrypt": "^5.1.1",
-    "connect-mongo": "^5.1.0",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
-    "express": "^4.19.2",
-    "express-async-handler": "^1.2.0",
-    "express-session": "^1.18.0",
-    "express-validator": "^7.0.1",
-    "http-status-codes": "^2.3.0",
-    "mongoose": "^8.3.2",
-    "passport": "^0.7.0",
-    "passport-local": "^1.0.0"
-  },
-  "devDependencies": {
-    "@types/express": "^4.17.21",
-    "@types/node": "^20.12.7",
-    "@typescript-eslint/eslint-plugin": "^7.7.1",
-    "@typescript-eslint/parser": "^7.7.1",
-    "autoprefixer": "^10.4.19",
-    "eslint": "^8.57.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-prettier": "^5.1.3",
-    "nodemon": "^3.1.0",
-    "postcss": "^8.4.38",
-    "postcss-cli": "^11.0.0",
-    "prettier": "^3.2.5",
-    "tailwindcss": "^3.4.3",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
+    "express": "^4.21.1"
   }
 }
