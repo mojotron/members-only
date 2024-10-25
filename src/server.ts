@@ -4,6 +4,7 @@ import path from "node:path";
 import express from "express";
 //
 import router from "./routes/routes.js";
+import notFoundMiddleware from "./middlewares/notFound.js";
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,6 +17,7 @@ app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/", router);
+app.use(router);
+app.use(notFoundMiddleware);
 
 app.listen(port, () => console.log(`server running on port ${port}`));
