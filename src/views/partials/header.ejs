@@ -1,3 +1,12 @@
+<!-- 
+params: {
+  auth: boolean
+  display: text of the link
+}
+-->
+
 <header>
   <h1 class="text-red-500">Members Only</h1>
+  <% if(auth === true) { %> <%- include("cta-link", {path: "/auth/log-out",
+  display: "logout"}) %> <% } else { %> <% } %>
 </header>

@@ -7,9 +7,19 @@
     <title>Members Only | Basic User Auth</title>
   </head>
   <body class="w-[100vw] h-[100vh] flex flex-col">
-    <%- include("../partials/header.ejs", {auth: true}) %>
+    <%- include("../partials/header.ejs") %>
     <!--  -->
-    <main></main>
+    <main>
+      <form action="/sign-up">
+        <label for="firstName">first name</label>
+        <input
+          type="text"
+          name="firstName"
+          id="firstName"
+          placeholder="first name"
+        />
+      </form>
+    </main>
     <!--  -->
     <%- include("../partials/footer.ejs") %>
   </body>
