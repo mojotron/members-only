@@ -7,17 +7,29 @@
     <title>Members Only | Basic User Auth</title>
   </head>
   <body class="w-[100vw] h-[100vh] flex flex-col">
-    <%- include("../partials/header.ejs") %>
+    <%- include("../partials/header.ejs", {auth: false}) %>
     <!--  -->
     <main>
-      <form action="/sign-up">
-        <label for="firstName">first name</label>
-        <input
-          type="text"
-          name="firstName"
-          id="firstName"
-          placeholder="first name"
-        />
+      <form action="/auth/sign-up" method="post">
+        <%- include("../partials/section-heading", {display: "sign up"}) %>
+        <!--  -->
+        <%- include("../partials/input-field", {label: "first name", nameId:
+        "firstName", type: "text"}) %>
+        <!--  -->
+        <%- include("../partials/input-field", {label: "last name", nameId:
+        "lastName", type: "text"}) %>
+        <!--  -->
+        <%- include("../partials/input-field", {label: "email", nameId: "email",
+        type: "email"}) %>
+        <!--  -->
+        <%- include("../partials/input-field", {label: "password", nameId:
+        "password", type: "password"}) %>
+        <!--  -->
+        <%- include("../partials/input-field", {label: "confirm password",
+        nameId: "confirmPassword", type: "password"}) %>
+        <!--  -->
+        <%- include("../partials/cta-button", {display: "create user", type:
+        "submit"}) %>
       </form>
     </main>
     <!--  -->
