@@ -6,12 +6,13 @@
     <link rel="stylesheet" href="styles/main.css" />
     <title>Members Only | Basic User Auth</title>
   </head>
-  <body class="w-[100vw] h-[100vh] flex flex-col">
+  <body class="w-[100vw] h-[100vh] flex flex-col bg-white">
     <%- include("../partials/header.ejs", {auth: false}) %>
     <!--  -->
-    <main>
+    <main class="p-4 flex flex-col items-center">
       <form action="/auth/sign-up" method="post">
-        <%- include("../partials/section-heading", {display: "sign up"}) %>
+        <%- include("../partials/section-heading", { display: "Create New User"
+        }) %>
         <!--  -->
         <%- include("../partials/input-field", {label: "first name", nameId:
         "firstName", type: "text"}) %>

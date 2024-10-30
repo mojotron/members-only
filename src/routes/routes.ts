@@ -1,11 +1,10 @@
 import { Router } from "express";
-import { getIndexView } from "../controllers/indexController.js";
-// routes
-import authRoutes from "./authRoutes.js";
+import { indexView, signUpView } from "../controllers/viewsController.js";
 
 const router = Router();
-
-router.get("/", getIndexView);
-router.use("/auth", authRoutes);
+// views
+router.get("/", indexView);
+router.get("/sign-up", signUpView);
+// auth
 
 export default router;

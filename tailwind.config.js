@@ -7,11 +7,6 @@ export default {
       sans: ["Roboto", "sans-serif"],
     },
     fontSize: {
-      thin: "300",
-      normal: "500",
-      bold: "700",
-    },
-    fontWeight: {
       xs: "0.64rem",
       sm: "0.8rem",
       base: "1rem",
@@ -21,6 +16,11 @@ export default {
       "3xl": "2.441rem",
       "4xl": "3.052rem",
       "5xl": "3.815rem",
+    },
+    fontWeight: {
+      thin: "300",
+      normal: "500",
+      bold: "700",
     },
     spacing: {
       sm: "8px",
@@ -39,8 +39,11 @@ export default {
     },
     colors: {
       white: "#eae6e3",
+      gray: {
+        200: "#a8acb9",
+        400: "#5b5a5c",
+      },
       black: "#25211e",
-      blue: "#a8acb9",
       pink: "#d1a99a",
     },
     extend: {},

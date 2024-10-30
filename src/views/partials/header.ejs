@@ -5,9 +5,10 @@ params: {
 }
 -->
 
-<header>
-  <h1 class="text-red-500">Members Only</h1>
-  <% if(auth === true) { %>
+<header class="pt-6 py-4 pb-3 bg-pink">
+  <h1 class="font-display font-bold text-3xl text-white">Members Only</h1>
+
+  <% if(auth) { %>
   <!--  -->
   <%- include("cta-link", {path: "/auth/log-out",display: "logout"}) %>
   <!--  -->

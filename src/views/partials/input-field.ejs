@@ -5,35 +5,20 @@ params: {
   label: string
 }
 -->
-<div>
-  <% if(type === 'text') { %>
-  <label for="<%- nameId %>"><%- label %></label>
-  <input
-    type="text"
+<div class="flex flex-col">
+  <label class="text-gray-400" for="<%- nameId %>"><%- label %></label>
+
+  <% if(type === 'textarea') { %>
+  <textarea
+    class="placeholder:text-gray-200"
     name="<%- nameId %>"
     id="<%- nameId %>"
-    placeholder="<%- label%>"
-  />
-  <% } else if (type === 'email') { %>
-  <label for="<%- nameId %>"><%- label %></label>
+  ></textarea>
+
+  /> <% } else { %>
   <input
-    type="email"
-    name="<%- nameId %>"
-    id="<%- nameId %>"
-    placeholder="<%- label%>"
-  />
-  <% } else if (type === 'email') { %>
-  <label for="<%- nameId %>"><%- label %></label>
-  <input
-    type="email"
-    name="<%- nameId %>"
-    id="<%- nameId %>"
-    placeholder="<%- label%>"
-  />
-  <% } else if (type === 'password') { %>
-  <label for="<%- nameId %>"><%- label %></label>
-  <input
-    type="password"
+    class="placeholder:text-gray-200"
+    type="<%- type %>"
     name="<%- nameId %>"
     id="<%- nameId %>"
     placeholder="<%- label%>"
