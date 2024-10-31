@@ -1,8 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import { StatusCodes } from "http-status-codes";
 
-const getSignup = (req: Request, res: Response) => {
-  res.status(StatusCodes.OK).render("pages/sign-up-form");
+const signUp = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    res.status(StatusCodes.OK).render("pages/sign-up-form");
+  } catch (error) {
+    return next(error);
+  }
 };
-
-export { getSignup };
+export { signUp };

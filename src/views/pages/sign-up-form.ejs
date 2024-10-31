@@ -10,24 +10,27 @@
     <%- include("../partials/header.ejs", {auth: false}) %>
     <!--  -->
     <main class="p-4 flex flex-col items-center">
-      <form action="/auth/sign-up" method="post">
+      <form action="<%- actionPath %>" method="post">
         <%- include("../partials/section-heading", { display: "Create New User"
         }) %>
         <!--  -->
         <%- include("../partials/input-field", {label: "first name", nameId:
-        "firstName", type: "text"}) %>
+        "firstName", type: "text", value: values.firstName }) %>
         <!--  -->
         <%- include("../partials/input-field", {label: "last name", nameId:
-        "lastName", type: "text"}) %>
+        "lastName", type: "text", value: values.lastName}) %>
         <!--  -->
         <%- include("../partials/input-field", {label: "email", nameId: "email",
-        type: "email"}) %>
+        type: "email", value: values.email}) %>
         <!--  -->
         <%- include("../partials/input-field", {label: "password", nameId:
-        "password", type: "password"}) %>
+        "password", type: "password", value: values.password}) %>
         <!--  -->
         <%- include("../partials/input-field", {label: "confirm password",
-        nameId: "confirmPassword", type: "password"}) %>
+        nameId: "confirmPassword", type: "password", value:
+        values.confirmPassword}) %>
+        <!--  -->
+        <%- include("../partials/form-errors", {errors: errors}) %>
         <!--  -->
         <%- include("../partials/cta-button", {display: "create user", type:
         "submit"}) %>

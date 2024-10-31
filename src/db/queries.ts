@@ -9,13 +9,19 @@ type UserType = {
 };
 
 const insertUser = async (userData: UserType) => {
-  const date = new Date();
+  const timestamp = new Date().toISOString();
   try {
     await pool.query(
       `INSERT INTO app_user
       (uuid, first_name, last_name, email, password, member, created_at)
-      VALUES();`,
-      [userData.firstName, userData.lastName, userData.email, userData.password]
+      VALUES(uuid_generate_v4(), $1, $2, $3, $4, false, timestamp);`,
+      [
+        userData.firstName,
+        userData.lastName,
+        userData.email,
+        userData.password,
+        timestamp,
+      ]
     );
   } catch (error) {
     throw new Error("db error: insert new user");
