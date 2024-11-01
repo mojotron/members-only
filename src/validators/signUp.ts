@@ -1,4 +1,4 @@
-import { body } from "express-validator";
+import { body, check } from "express-validator";
 
 const signUpValidators = [
   body("firstName")
@@ -24,15 +24,36 @@ const signUpValidators = [
   body("email")
     .trim()
     .notEmpty()
-    .withMessage("emil must not be empty")
+    .withMessage("email must not be empty")
     .isString()
-    .withMessage("")
+    .withMessage("email must be string")
     .isEmail()
-    .withMessage(""),
+    .withMessage("email format is not valid")
+    .normalizeEmail()
+    .escape(),
 
-  body("password"),
+  body("password")
+    .trim()
+    .notEmpty()
+    .withMessage("password must not be empty")
+    .isString()
+    .withMessage("password must be string")
+    .matches(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/)
+    .withMessage(
+      "password must be be minimum of 8 character and including uppercase letter, lowercase letter, number and special character @$!%*?&"
+    )
+    .escape(),
 
-  body("confirmPassword"),
+  check("confirmPassword")
+    .trim()
+    .custom((confirmPassword, { req }) => {
+      const password = req.body.password;
+      if (password !== confirmPassword) {
+        return false;
+      }
+      return true;
+    })
+    .withMessage("password and custom password must be equal"),
 ];
 
 export default signUpValidators;

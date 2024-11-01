@@ -45,6 +45,8 @@ export default {
       },
       black: "#25211e",
       pink: "#d1a99a",
+      errorBg: "#f7d7da",
+      errorText: "#ff4f5f",
     },
     extend: {},
   },

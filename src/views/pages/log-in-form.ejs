@@ -11,14 +11,7 @@
     <!--  -->
     <main class="p-4 flex flex-col items-center">
       <form action="<%- actionPath %>" method="post">
-        <%- include("../partials/section-heading", { display: "Create New User"
-        }) %>
-        <!--  -->
-        <%- include("../partials/input-field", {label: "first name", nameId:
-        "firstName", type: "text", value: values.firstName }) %>
-        <!--  -->
-        <%- include("../partials/input-field", {label: "last name", nameId:
-        "lastName", type: "text", value: values.lastName}) %>
+        <%- include("../partials/section-heading", { display: "Log In" }) %>
         <!--  -->
         <%- include("../partials/input-field", {label: "email", nameId: "email",
         type: "email", value: values.email}) %>
@@ -26,17 +19,13 @@
         <%- include("../partials/input-field", {label: "password", nameId:
         "password", type: "password", value: values.password}) %>
         <!--  -->
-        <%- include("../partials/input-field", {label: "confirm password",
-        nameId: "confirmPassword", type: "password", value:
-        values.confirmPassword}) %>
-        <!--  -->
         <% if(errors.length > 0) { %>
         <!--  -->
         <%- include("../partials/form-errors",{errors: errors}) %>
         <!--  -->
         <% } %>
         <!--  -->
-        <%- include("../partials/cta-button", {display: "create user", type:
+        <%- include("../partials/cta-button", {display: "log in", type:
         "submit"}) %>
       </form>
     </main>

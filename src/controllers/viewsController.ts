@@ -19,4 +19,15 @@ const signUpView = (req: Request, res: Response) => {
   });
 };
 
-export { indexView, signUpView };
+const logInView = (req: Request, res: Response) => {
+  return res.status(StatusCodes.OK).render("pages/log-in-form", {
+    actionPath: `/log-in`,
+    values: {
+      email: "",
+      password: "",
+    },
+    errors: [],
+  });
+};
+
+export { indexView, signUpView, logInView };
