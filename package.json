@@ -16,8 +16,13 @@
   "license": "ISC",
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
+    "@types/connect-pg-simple": "^7.0.3",
     "@types/express": "^5.0.0",
+    "@types/express-session": "^1.18.0",
     "@types/node": "^22.7.7",
+    "@types/passport": "^1.0.17",
+    "@types/passport-local": "^1.0.38",
+    "@types/pg": "^8.11.10",
     "autoprefixer": "^10.4.20",
     "gulp": "^5.0.0",
     "gulp-copy": "^5.0.0",
@@ -30,15 +35,16 @@
     "typescript": "^5.6.3"
   },
   "dependencies": {
-    "-": "^0.0.1",
-    "@types/pg": "^8.11.10",
     "bcrypt": "^5.1.1",
-    "D": "^1.0.0",
+    "connect-pg-simple": "^9.0.1",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
+    "express-session": "^1.18.1",
     "express-validator": "^7.2.0",
     "http-status-codes": "^2.3.0",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
     "pg": "^8.13.1"
   }
 }

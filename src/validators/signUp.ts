@@ -38,7 +38,7 @@ const signUpValidators = [
     .withMessage("password must not be empty")
     .isString()
     .withMessage("password must be string")
-    .matches(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/)
+    .matches(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,}$/)
     .withMessage(
       "password must be be minimum of 8 character and including uppercase letter, lowercase letter, number and special character @$!%*?&"
     )

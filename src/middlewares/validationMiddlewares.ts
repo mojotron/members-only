@@ -21,4 +21,20 @@ const signUpValidation = (req: Request, res: Response, next: NextFunction) => {
   return next();
 };
 
-export { signUpValidation };
+const logInValidation = (req: Request, res: Response, next: NextFunction) => {
+  const result = validationResult(req);
+  if (!result.isEmpty()) {
+    const errorMessages = result.array().map((err) => err.msg);
+    return res.status(StatusCodes.OK).render("pages/log-in-form", {
+      actionPath: `/log-in`,
+      values: {
+        email: req.body.email,
+        password: req.body.password,
+      },
+      errors: errorMessages,
+    });
+  }
+  return next();
+};
+
+export { signUpValidation, logInValidation };

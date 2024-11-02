@@ -7,8 +7,7 @@ import { insertUser } from "../db/queries.js";
 
 const signUp = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { firstName, lastName, email, password, confirmPassword } =
-      matchedData(req);
+    const { firstName, lastName, email, password } = matchedData(req);
 
     const salt = await genSalt(12);
     const hashedPassword = await hash(password, salt);
@@ -18,7 +17,6 @@ const signUp = async (req: Request, res: Response, next: NextFunction) => {
       lastName,
       email,
       password: hashedPassword,
-      member: false,
     });
 
     return res.status(StatusCodes.OK).redirect("/log-in");
