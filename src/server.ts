@@ -19,10 +19,10 @@ const app = express();
 // views
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+// session setup
 //
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
-// session setup
 const databaseStore = new (connectPgSimple(session))({
   pool: connectionPool,
   tableName: "session",

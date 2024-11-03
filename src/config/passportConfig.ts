@@ -5,7 +5,7 @@ import { compare } from "bcrypt";
 
 const customFields = {
   usernameField: "email",
-  passwordField: "passport",
+  passwordField: "password",
 };
 
 const strategy = new LocalStrategy.Strategy(

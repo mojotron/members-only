@@ -24,4 +24,15 @@ const signUp = async (req: Request, res: Response, next: NextFunction) => {
     return next(error);
   }
 };
-export { signUp };
+
+const logOut = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    req.logout((err) => {
+      if (err) return next(err);
+    });
+    return res.redirect("/");
+  } catch (error) {
+    return next(error);
+  }
+};
+export { signUp, logOut };
