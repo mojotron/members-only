@@ -3,9 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <title>Members Only | Basic User Auth</title>
   </head>
-  <body>
-    <h1>Error Page</h1>
+  <body class="w-[100vw] h-[100vh] flex flex-col bg-white">
+    <%- include("../partials/header.ejs", {auth: true}) %>
+    <!--  -->
+    <main>
+      <%- include("../partials/section-heading", {display: `${errorName}
+      (${statusCode})`}) %>
+      <p><%- message %></p>
+    </main>
+    <!--  -->
+    <%- include("../partials/footer.ejs") %>
   </body>
 </html>
