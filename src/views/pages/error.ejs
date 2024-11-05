@@ -7,12 +7,20 @@
     <title>Members Only | Basic User Auth</title>
   </head>
   <body class="w-[100vw] h-[100vh] flex flex-col bg-white">
-    <%- include("../partials/header.ejs", {auth: true}) %>
+    <%- include("../partials/header.ejs", {isAuth: locals.isAuth || false}) %>
     <!--  -->
-    <main>
-      <%- include("../partials/section-heading", {display: `${errorName}
-      (${statusCode})`}) %>
-      <p><%- message %></p>
+    <main class="p-4 flex flex-col items-center gap-6">
+      <%- include("../partials/section-heading", {display: heading}) %> <%-
+      include("../partials/paragraph", {text: message}) %> <% if(!locals.isAuth)
+      { %>
+      <div>
+        <%- include("../partials/cta-link", {path: "/log-in",display: "login"})
+        %>
+        <!--  -->
+        <%- include("../partials/cta-link", {path: "/sign-up",display:
+        "signup"}) %>
+      </div>
+      <% } %>
     </main>
     <!--  -->
     <%- include("../partials/footer.ejs") %>

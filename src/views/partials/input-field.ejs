@@ -6,12 +6,14 @@ params: {
   value: string
 }
 -->
-<div class="flex flex-col">
-  <label class="text-gray-400" for="<%- nameId %>"><%- label %></label>
+<div class="mb-2">
+  <label class="block text-gray-400 font-bold mb-2" for="<%- nameId %>"
+    ><%- label %></label
+  >
 
   <% if(type === 'textarea') { %>
   <textarea
-    class="placeholder:text-gray-200"
+    class="shadow appearance-none border border-pink rounded w-full py-2 px-3 text-gray-400 leading-tight focus:outline-none focus:shadow-outline"
     name="<%- nameId %>"
     id="<%- nameId %>"
   >
@@ -19,7 +21,7 @@ params: {
   >
   <% } else { %>
   <input
-    class="placeholder:text-gray-200"
+    class="shadow appearance-none border border-pink rounded w-full py-2 px-3 text-gray-400 leading-tight focus:outline-none focus:shadow-outline"
     type="<%- type %>"
     name="<%- nameId %>"
     id="<%- nameId %>"

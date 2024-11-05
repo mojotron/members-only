@@ -12,8 +12,6 @@ const strategy = new LocalStrategy.Strategy(
   customFields,
   async (email, password, done) => {
     try {
-      console.log("verify");
-
       if (!email) return done(null, false);
       const user = await selectUserAuth(email);
       if (user === undefined)
@@ -31,15 +29,11 @@ const strategy = new LocalStrategy.Strategy(
 );
 
 passport.serializeUser((user, done) => {
-  console.log("serialize");
-
   const { userId } = user as { userId: string };
   done(null, userId);
 });
 
 passport.deserializeUser(async (userUid, done) => {
-  console.log("deserialize");
-
   try {
     const user = await selectUser(userUid as string);
     done(false, user);

@@ -16,6 +16,10 @@ import {
 import { signUp, logOut } from "../controllers/authController.js";
 // login auth
 import authMiddleware from "../middlewares/authMiddleware.js";
+// routes
+import messageRoutes from "./messageRoutes.js";
+// is auth middleware
+import isAuthenticated from "../middlewares/isAuthenticatedMiddleware.js";
 
 const router = Router();
 // views
@@ -26,5 +30,7 @@ router.get("/log-in", logInView);
 router.post("/sign-up", signUpValidators, signUpValidation, signUp);
 router.post("/log-in", logInValidators, logInValidation, authMiddleware);
 router.get("/log-out", logOut);
+// messages
+router.use("/messages", isAuthenticated, messageRoutes);
 
 export default router;

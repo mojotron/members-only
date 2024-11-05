@@ -1,18 +1,34 @@
 <!-- 
 params: {
-  auth: boolean
+  isAuth: boolean
   display: text of the link
 }
 -->
 
-<header class="pt-6 py-4 pb-3 bg-pink">
+<header class="pt-6 px-4 pb-3 bg-pink flex items-center justify-between">
   <h1 class="font-display font-bold text-3xl text-white">Members Only</h1>
 
-  <% if(auth) { %>
-  <!--  -->
-  <%- include("cta-link", {path: "/auth/log-out",display: "logout"}) %>
-  <!--  -->
-  <% } else { %>
-  <!--  -->
-  <% } %>
+  <div class="flex items-center gap-6">
+    <nav class="text-white">
+      <ul class="flex items-center gap-2">
+        <a class="hover:text-gray-400" href="/"><li>home</li></a>
+        <a class="hover:text-gray-400" href="/messages"><li>messages</li></a>
+        <a class="hover:text-gray-400" href="/about"><li>about</li></a>
+      </ul>
+    </nav>
+
+    <div>
+      <% if(isAuth) { %>
+      <!-- DISPLAY LOGOUT OPTION -->
+      <%- include("cta-link", {path: "/log-out",display: "logout"}) %>
+      <!--  -->
+      <% } else { %>
+      <!-- DISPLAY LOGIN SIGNUP OPTION -->
+      <%- include("cta-link", {path: "/log-in",display: "login"}) %>
+      <!--  -->
+      <%- include("cta-link", {path: "/sign-up",display: "signup"}) %>
+      <!--  -->
+      <% } %>
+    </div>
+  </div>
 </header>

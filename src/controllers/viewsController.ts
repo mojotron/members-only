@@ -2,7 +2,9 @@ import { Request, Response, NextFunction } from "express";
 import { StatusCodes } from "http-status-codes";
 
 const indexView = (req: Request, res: Response) => {
-  return res.status(StatusCodes.OK).render("pages/index");
+  return res.status(StatusCodes.OK).render("pages/index", {
+    isAuth: req.isAuthenticated(),
+  });
 };
 
 const signUpView = (req: Request, res: Response) => {

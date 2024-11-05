@@ -7,10 +7,10 @@
     <title>Members Only | Basic User Auth</title>
   </head>
   <body class="w-[100vw] h-[100vh] flex flex-col bg-white">
-    <%- include("../partials/header.ejs", {auth: false}) %>
+    <%- include("../partials/header.ejs", {isAuth: locals.isAuth || false}) %>
     <!--  -->
-    <main class="p-4 flex flex-col items-center">
-      <form action="<%- actionPath %>" method="post">
+    <main class="w-full p-4 flex flex-col items-center">
+      <form class="w-full" action="<%- actionPath %>" method="post">
         <%- include("../partials/section-heading", { display: "Create New User"
         }) %>
         <!--  -->

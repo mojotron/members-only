@@ -1,21 +1,5 @@
 import pool from "./pool.js";
-
-type UserSignupType = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-};
-
-type UserType = {
-  uid: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  member: boolean;
-  createdAt: Date;
-};
+import type { AppUserType, UserSignupType } from "../types/userTypes.js";
 
 const insertUser = async (userData: UserSignupType) => {
   const timestamp = new Date().toISOString();
@@ -58,16 +42,7 @@ const selectUserAuth = async (
 
 const selectUser = async (
   userUid: string
-): Promise<
-  | {
-      userUid: string;
-      firstName: string;
-      lastName: string;
-      member: boolean;
-      createdAt: string;
-    }
-  | undefined
-> => {
+): Promise<AppUserType | undefined> => {
   try {
     const { rows } = await pool.query(
       `SELECT user_uid, first_name, last_name, member, created_at 
