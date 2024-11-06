@@ -8,6 +8,8 @@ const indexView = (req: Request, res: Response) => {
 };
 
 const signUpView = (req: Request, res: Response) => {
+  if (req.isAuthenticated()) return res.status(StatusCodes.OK).redirect("/");
+
   return res.status(StatusCodes.OK).render("pages/sign-up-form", {
     actionPath: `/sign-up`,
     values: {
@@ -22,6 +24,8 @@ const signUpView = (req: Request, res: Response) => {
 };
 
 const logInView = (req: Request, res: Response) => {
+  if (req.isAuthenticated()) return res.status(StatusCodes.OK).redirect("/");
+
   return res.status(StatusCodes.OK).render("pages/log-in-form", {
     actionPath: `/log-in`,
     values: {

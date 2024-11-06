@@ -13,4 +13,21 @@ const getMessages = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export { getMessages };
+const createMessageView = (req: Request, res: Response, next: NextFunction) => {
+  return res.status(StatusCodes.OK).render("pages/message-form", {
+    actionPath: `/messages/new`,
+    values: {
+      title: "",
+      text: "",
+    },
+    errors: [],
+  });
+};
+
+const createMessage = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {};
+
+export { getMessages, createMessageView, createMessage };

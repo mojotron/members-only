@@ -20,7 +20,6 @@ const app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 // session setup
-//
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
 const databaseStore = new (connectPgSimple(session))({
@@ -34,7 +33,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 1000 * 60 * 3, // 3 min for testing purposes
+      maxAge: 1000 * 60 * 60 * 7,
     },
   })
 );

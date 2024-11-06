@@ -7,7 +7,7 @@
     <title>Members Only | Basic User Auth</title>
   </head>
   <body class="w-[100vw] h-[100vh] flex flex-col bg-white">
-    <%- include("../partials/header.ejs", {isAuth: locals.isAuth || false}) %>
+    <%- include("../partials/header.ejs", {isAuth: locals.isAuth || true}) %>
     <!--  -->
     <main class="w-full p-4 flex flex-col items-center">
       <form
@@ -15,13 +15,14 @@
         action="<%- actionPath %>"
         method="post"
       >
-        <%- include("../partials/section-heading", { display: "Log In" }) %>
+        <%- include( "../partials/section-heading", { display: "Create Message"
+        }) %>
         <!--  -->
-        <%- include("../partials/input-field", {label: "email", nameId: "email",
-        type: "email", value: values.email}) %>
+        <%- include("../partials/input-field", {label: "title", nameId: "title",
+        type: "text", value: values.title}) %>
         <!--  -->
-        <%- include("../partials/input-field", {label: "password", nameId:
-        "password", type: "password", value: values.password}) %>
+        <%- include("../partials/input-field", {label: "text body", nameId:
+        "text", type: "textarea", value: values.password}) %>
         <!--  -->
         <% if(errors.length > 0) { %>
         <!--  -->
@@ -29,7 +30,7 @@
         <!--  -->
         <% } %>
         <!--  -->
-        <%- include("../partials/cta-button", {display: "login", type:
+        <%- include("../partials/cta-button", {display: "create message", type:
         "submit"}) %>
       </form>
     </main>

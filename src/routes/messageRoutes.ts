@@ -1,7 +1,13 @@
 import { Router } from "express";
-import { getMessages } from "../controllers/messagesController.js";
+import {
+  getMessages,
+  createMessageView,
+  createMessage,
+} from "../controllers/messagesController.js";
 
 const router = Router();
+
 router.get("/", getMessages);
+router.get("/new", createMessageView);
 
 export default router;
