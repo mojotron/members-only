@@ -7,8 +7,8 @@ const SQL = `
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 DROP TABLE IF EXISTS session;
-DROP TABLE IF EXISTS app_user;
-DROP TABLE IF EXISTS massage;
+DROP TABLE IF EXISTS app_user CASCADE;
+DROP TABLE IF EXISTS massage CASCADE;
 DROP INDEX IF EXISTS IDX_session_expire;
 
 CREATE TABLE session (
@@ -34,10 +34,10 @@ CREATE TABLE app_user (
 
 CREATE TABLE message (
   message_uid UUID PRIMARY KEY NOT NULL,
-  user_id UUID REFERENCES app_user(user_uid),
   title VARCHAR(255),
   text TEXT,
-  created_at TIMESTAMP NOT NULL
+  created_at TIMESTAMP NOT NULL,
+  user_uid UUID REFERENCES app_user(user_uid)
 );
 `;
 

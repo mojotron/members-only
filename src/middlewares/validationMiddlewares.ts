@@ -37,4 +37,20 @@ const logInValidation = (req: Request, res: Response, next: NextFunction) => {
   return next();
 };
 
-export { signUpValidation, logInValidation };
+const messageValidation = (req: Request, res: Response, next: NextFunction) => {
+  const result = validationResult(req);
+  if (!result.isEmpty()) {
+    const errorMessages = result.array().map((err) => err.msg);
+    return res.status(StatusCodes.OK).render("pages/message-form", {
+      actionPath: `/messages/new`,
+      values: {
+        title: req.body.title,
+        text: req.body.text,
+      },
+      errors: errorMessages,
+    });
+  }
+  return next();
+};
+
+export { signUpValidation, logInValidation, messageValidation };

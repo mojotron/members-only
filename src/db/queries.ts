@@ -63,4 +63,28 @@ const selectUser = async (
   }
 };
 
-export { insertUser, selectUserAuth, selectUser };
+// messages
+const insertMessage = async (userUid: string, title: string, text: string) => {
+  try {
+    const timestamp = new Date().toISOString();
+    await pool.query(
+      `
+    INSERT INTO message (message_uid, user_id, title, text, created_at)
+    VALUES (uuid_generate_v4(), $1, $2, $3, $4);`,
+      [userUid, title, text, timestamp]
+    );
+  } catch (error) {
+    console.log(error);
+
+    throw new Error("db error: insert message");
+  }
+};
+
+export {
+  // auth
+  insertUser,
+  selectUserAuth,
+  selectUser,
+  // messages
+  insertMessage,
+};
