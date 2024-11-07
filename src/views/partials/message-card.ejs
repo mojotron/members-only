@@ -1,0 +1,31 @@
+<!-- 
+params {
+  message: {
+    messageUid,
+    title,
+    createdAt,
+    userUid,
+    //
+    member: boolean,
+    author: boolean,
+  }
+}
+-->
+<li class="px-4 py-2 shadow-md shadow-gray-200 rounded-md hover:shadow-pink">
+  <div class="flex items-center gap-2 justify-end">
+    <%- include("./icon-link", {path: `/messages/${message.messageUid}`, type:
+    "view"}) %>
+    <!--  -->
+    <% if(message.author === true) { %> <%- include("./icon-link", {path:
+    `/messages/${message.messageUid}/edit`, type: "edit"}) %>
+    <!--  -->
+    <%- include("./icon-link", {path: `/messages/${message.messageUid}/delete`,
+    type: "delete"}) %> <% } %>
+  </div>
+
+  <h3 class="font-display text-pink text-lg font-bold"><%- message.title %></h3>
+
+  <% if(message.author || message.member) { %>
+  <p class="text-gray-200 text-sm"><%- message.createdAt %></p>
+  <% } %>
+</li>

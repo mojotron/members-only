@@ -9,12 +9,33 @@
   <body class="w-[100vw] h-[100vh] flex flex-col bg-white">
     <%- include("../partials/header.ejs", {isAuth: locals.isAuth || true}) %>
     <!--  -->
-    <main class="flex p-4">
-      <aside class="w-[200px] flex flex-col">
+    <main class="flex gap-2 p-4">
+      <aside class="flex flex-col gap-1">
         <%- include("../partials/cta-link", {path:"/messages/new", display:
-        "create new message"}) %>
+        "create new message"}) %> <%- include("../partials/cta-link",
+        {path:"/messages", display: "list your messages"}) %>
       </aside>
-      <section></section>
+
+      <section class="w-full">
+        <form action="/messages" method="get">
+          <input
+            class="shadow appearance-none border border-pink rounded w-full py-2 px-3 text-gray-400 leading-tight focus:outline-none focus:shadow-outline placeholder:text-gray-200"
+            type="search"
+            name="search"
+            placeholder="search"
+          />
+        </form>
+
+        <% if(messages.length > 0) { %>
+        <ul class="space-y-2">
+          <% messages.forEach((msg) => { %>
+          <!--  -->
+          <%- include("../partials/message-card", {message: msg}) %> <% }); %>
+        </ul>
+        <% } else { %>
+        <p>no messages created</p>
+        <% } %>
+      </section>
     </main>
     <!--  -->
     <%- include("../partials/footer.ejs") %>

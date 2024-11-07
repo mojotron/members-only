@@ -1,5 +1,6 @@
 import pool from "./pool.js";
 import type { AppUserType, UserSignupType } from "../types/userTypes.js";
+import { MessageCardType } from "../types/messagesTypes.js";
 
 const insertUser = async (userData: UserSignupType) => {
   const timestamp = new Date().toISOString();
@@ -45,19 +46,18 @@ const selectUser = async (
 ): Promise<AppUserType | undefined> => {
   try {
     const { rows } = await pool.query(
-      `SELECT user_uid, first_name, last_name, member, created_at 
+      `SELECT 
+      user_uid AS "userUid",
+      first_name AS "firstName",
+      last_name AS "lastName",
+      member,
+      created_at AS "createdAt" 
       FROM app_user WHERE user_uid = $1;`,
       [userUid]
     );
     const user = rows[0];
-    if (user === undefined) return undefined;
-    return {
-      userUid: user.user_uid,
-      firstName: user.first_name,
-      lastName: user.user_last_name,
-      member: user.member,
-      createdAt: user.created_at,
-    };
+
+    return user;
   } catch (error) {
     throw new Error("db error: select user");
   }
@@ -70,13 +70,36 @@ const insertMessage = async (userUid: string, title: string, text: string) => {
     await pool.query(
       `
     INSERT INTO message (message_uid, user_id, title, text, created_at)
-    VALUES (uuid_generate_v4(), $1, $2, $3, $4);`,
+    VALUES (uuid_generate_v4(), $1, $2, $3, $4);
+    `,
       [userUid, title, text, timestamp]
     );
   } catch (error) {
-    console.log(error);
-
     throw new Error("db error: insert message");
+  }
+};
+
+const selectMessagesByUserUid = async (
+  userUid: string
+): Promise<MessageCardType[]> => {
+  try {
+    const { rows } = await pool.query(
+      `SELECT
+      message.message_uid AS "messageUid",
+      message.title,
+      message.created_at AS "createdAt",
+      app_user.user_uid AS "userUid"
+      FROM message INNER JOIN app_user
+      ON message.user_id = app_user.user_uid
+      WHERE user_id = $1
+      ORDER BY message.created_at ASC;`,
+      [userUid]
+    );
+
+    return rows;
+  } catch (error) {
+    console.log(error);
+    throw new Error("db error: select messages by user uid");
   }
 };
 
@@ -87,4 +110,5 @@ export {
   selectUser,
   // messages
   insertMessage,
+  selectMessagesByUserUid,
 };
