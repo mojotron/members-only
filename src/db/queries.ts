@@ -1,6 +1,6 @@
 import pool from "./pool.js";
 import type { AppUserType, UserSignupType } from "../types/userTypes.js";
-import { MessageCardType } from "../types/messagesTypes.js";
+import { MessageCardType, MessageType } from "../types/messagesTypes.js";
 
 const insertUser = async (userData: UserSignupType) => {
   const timestamp = new Date().toISOString();
@@ -95,11 +95,50 @@ const selectMessagesByUserUid = async (
       ORDER BY message.created_at ASC;`,
       [userUid]
     );
-
     return rows;
   } catch (error) {
     console.log(error);
     throw new Error("db error: select messages by user uid");
+  }
+};
+
+const selectMessageByUid = async (
+  messageUid: string
+): Promise<MessageType | undefined> => {
+  try {
+    const { rows } = await pool.query(
+      `SELECT
+      title,
+      text,
+      message_uid AS "messageUid",
+      created_at AS "createdAt",
+      user_id AS "userUid"
+      FROM message
+      WHERE message_uid = $1;`,
+      [messageUid]
+    );
+
+    return rows[0];
+  } catch (error) {
+    throw new Error("db error: select messages by message uid");
+  }
+};
+
+const updateMessage = async (
+  messageUid: string,
+  title: string,
+  text: string
+) => {
+  try {
+    const timestamp = new Date().toISOString();
+    await pool.query(
+      `UPDATE message
+      SET title = $2, text = $3, created_at = $4
+      WHERE message_uid = $1`,
+      [messageUid, title, text, timestamp]
+    );
+  } catch (error) {
+    throw new Error("db error: update messages");
   }
 };
 
@@ -111,4 +150,6 @@ export {
   // messages
   insertMessage,
   selectMessagesByUserUid,
+  selectMessageByUid,
+  updateMessage,
 };

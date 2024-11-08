@@ -1,13 +1,21 @@
 import { Request, Response, NextFunction } from "express";
-
 import { StatusCodes } from "http-status-codes";
 import { matchedData } from "express-validator";
-import { insertMessage, selectMessagesByUserUid } from "../db/queries.js";
+// DB queries
+import {
+  insertMessage,
+  selectMessagesByUserUid,
+  selectMessageByUid,
+  updateMessage,
+} from "../db/queries.js";
+// types
 import type { AppUserType } from "../types/userTypes.js";
 import type { MessageCardType } from "../types/messagesTypes.js";
+// helpers
 import isMember from "../utils/isMember.js";
 import { timeDistance } from "../utils/formatTime.js";
 
+// GET
 const getMessages = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const currentUser = req.user as AppUserType;
@@ -33,9 +41,11 @@ const getMessages = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+// CREATE
 const createMessageView = (req: Request, res: Response, next: NextFunction) => {
   return res.status(StatusCodes.OK).render("pages/message-form", {
     actionPath: `/messages/new`,
+    edit: false,
     values: {
       title: "",
       text: "",
@@ -61,4 +71,54 @@ const createMessage = async (
   }
 };
 
-export { getMessages, createMessageView, createMessage };
+// EDIT
+const editMessageView = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { messageUid } = req.params;
+    const currentUser = req.user as AppUserType;
+    const message = await selectMessageByUid(messageUid as string);
+
+    if (message === undefined || message.userUid !== currentUser.userUid) {
+      return res.status(StatusCodes.BAD_REQUEST).render("pages/error", {
+        isAuth: req.isAuthenticated(),
+        heading: `Bad Request`,
+        message: `You can't edit this message!`,
+      });
+    }
+
+    return res.status(StatusCodes.OK).render("pages/message-form", {
+      actionPath: `/messages/${messageUid}/edit`,
+      edit: true,
+      values: {
+        title: message.title,
+        text: message.text,
+      },
+      errors: [],
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+const editMessage = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { messageUid } = req.params;
+    const { text, title } = matchedData(req);
+    await updateMessage(messageUid as string, title, text);
+    return res.status(StatusCodes.OK).redirect("/messages");
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export {
+  getMessages,
+  createMessageView,
+  createMessage,
+  editMessageView,
+  editMessage,
+};

@@ -38,11 +38,18 @@ const logInValidation = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const messageValidation = (req: Request, res: Response, next: NextFunction) => {
+  const { messageUid } = req.params;
+  console.log("val", messageUid);
+
   const result = validationResult(req);
   if (!result.isEmpty()) {
     const errorMessages = result.array().map((err) => err.msg);
     return res.status(StatusCodes.OK).render("pages/message-form", {
-      actionPath: `/messages/new`,
+      actionPath:
+        messageUid === undefined
+          ? `/messages/new`
+          : `/messages/${messageUid}/edit`,
+      edit: messageUid !== undefined,
       values: {
         title: req.body.title,
         text: req.body.text,
