@@ -142,6 +142,20 @@ const updateMessage = async (
   }
 };
 
+const deleteMessageByUid = async (messageUid: string) => {
+  try {
+    await pool.query(
+      `DELETE FROM message
+      WHERE message_uid = $1;`,
+      [messageUid]
+    );
+  } catch (error) {
+    console.log(error);
+
+    throw new Error("db error: delete messages");
+  }
+};
+
 export {
   // auth
   insertUser,
@@ -152,4 +166,5 @@ export {
   selectMessagesByUserUid,
   selectMessageByUid,
   updateMessage,
+  deleteMessageByUid,
 };

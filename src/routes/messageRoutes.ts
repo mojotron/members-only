@@ -5,6 +5,8 @@ import {
   createMessage,
   editMessageView,
   editMessage,
+  deleteMessageView,
+  deleteMessage,
 } from "../controllers/messagesController.js";
 import messageValidator from "../validators/message.js";
 import { messageValidation } from "../middlewares/validationMiddlewares.js";
@@ -23,5 +25,8 @@ router.post(
   messageValidation,
   editMessage
 );
+// delete message
+router.get("/:messageUid/delete", deleteMessageView);
+router.post("/:messageUid/delete", deleteMessage);
 
 export default router;

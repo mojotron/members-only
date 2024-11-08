@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>Members Only | Basic User Auth</title>
+  </head>
+  <body class="w-[100vw] h-[100vh] flex flex-col bg-white">
+    <%- include("../partials/header.ejs", {isAuth: locals.isAuth || true}) %>
+    <!--  -->
+    <main class="flex flex-col items-center gap-2 p-4">
+      <div
+        class="mt-8 border border-pink rounded-md p-4 flex flex-col items-center gap-4"
+      >
+        <%- include("../partials/section-heading", {display: heading}) %>
+        <!--  -->
+        <%- include("../partials/paragraph", {text: text}) %>
+
+        <form
+          class="w-full sm:w-[500px] flex justify-center items-center gap-8"
+          method="post"
+          action="<%- confirmPath %>"
+        >
+          <%- include("../partials/cta-link", {path: cancelPath, display:
+          "cancel"}) %>
+          <!--  -->
+          <%- include("../partials/cta-button", {type: "submit", display:
+          `delete`}) %>
+        </form>
+      </div>
+    </main>
+    <!--  -->
+    <%- include("../partials/footer.ejs") %>
+  </body>
+</html>

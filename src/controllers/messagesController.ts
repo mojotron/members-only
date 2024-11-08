@@ -7,6 +7,7 @@ import {
   selectMessagesByUserUid,
   selectMessageByUid,
   updateMessage,
+  deleteMessageByUid,
 } from "../db/queries.js";
 // types
 import type { AppUserType } from "../types/userTypes.js";
@@ -115,10 +116,56 @@ const editMessage = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+// DELETE
+const deleteMessageView = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { messageUid } = req.params;
+    const currentUser = req.user as AppUserType;
+    const message = await selectMessageByUid(messageUid as string);
+
+    if (message === undefined || message.userUid !== currentUser.userUid) {
+      return res.status(StatusCodes.BAD_REQUEST).render("pages/error", {
+        isAuth: req.isAuthenticated(),
+        heading: `Bad Request`,
+        message: `You can't edit this message!`,
+      });
+    }
+
+    return res.status(StatusCodes.OK).render("pages/confirm-delete", {
+      isAuth: req.isAuthenticated(),
+      confirmPath: `/messages/${messageUid}/delete`,
+      cancelPath: `/messages`,
+      heading: `Delete message`,
+      text: `Are you sure you want to delete "${message.title}" message. This action is permanent!`,
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+const deleteMessage = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { messageUid } = req.params;
+    await deleteMessageByUid(messageUid as string);
+    res.status(StatusCodes.OK).redirect("/messages");
+  } catch (error) {
+    return next(error);
+  }
+};
+
 export {
   getMessages,
   createMessageView,
   createMessage,
   editMessageView,
   editMessage,
+  deleteMessageView,
+  deleteMessage,
 };

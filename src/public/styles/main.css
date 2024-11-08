@@ -514,6 +514,9 @@ video {
 .ml-2{
   margin-left: 12px;
 }
+.mt-8{
+  margin-top: 56px;
+}
 .mt-auto{
   margin-top: auto;
 }
@@ -552,6 +555,9 @@ video {
 .justify-end{
   justify-content: flex-end;
 }
+.justify-center{
+  justify-content: center;
+}
 .justify-evenly{
   justify-content: space-evenly;
 }
@@ -561,8 +567,14 @@ video {
 .gap-2{
   gap: 12px;
 }
+.gap-4{
+  gap: 24px;
+}
 .gap-6{
   gap: 40px;
+}
+.gap-8{
+  gap: 56px;
 }
 .space-y-2 > :not([hidden]) ~ :not([hidden]){
   --tw-space-y-reverse: 0;
