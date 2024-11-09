@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>Members Only | Basic User Auth</title>
+  </head>
+  <body class="w-[100vw] h-[100vh] flex flex-col bg-white">
+    <%- include("../partials/header.ejs", {isAuth: locals.isAuth || true}) %>
+    <!--  -->
+    <main class="flex gap-2 p-4 justify-center">
+      <article class="w-full max-w-[600px] pt-4 space-y-4">
+        <header class="w-full flex flex-col">
+          <% if(isCurrentAuthor) { %>
+          <div class="flex justify-end items-center gap-1">
+            <%- include("../partials/icon-link", {path:
+            `/messages/${message.messageUid}/edit`, type: "edit"}) %>
+            <!--  -->
+            <%- include("../partials/icon-link", {path:
+            `/messages/${message.messageUid}/delete`, type: "delete"}) %>
+            <!--  -->
+          </div>
+          <% } %>
+
+          <h2 class="font-display text-3xl text-pink font-bold">
+            <%- message.title %>
+          </h2>
+          <!--  -->
+          <% if(isCurrentAuthor || isCurrentMember) { %>
+          <div class="text-gray-400">
+            <span>created by</span>
+            <span class="font-bold"
+              ><%- author.firstName %> <%- author.lastName %></span
+            >
+            <span><%- message.createdAt %></span>
+            <span class="text-sm text-gray-200"
+              >(<%- message.dateCreated %>)</span
+            >
+          </div>
+
+          <% } %>
+          <!--  -->
+        </header>
+
+        <section>
+          <%- include("../partials/paragraph", {text: message.text}) %>
+        </section>
+      </article>
+    </main>
+    <!--  -->
+    <%- include("../partials/footer.ejs") %>
+  </body>
+</html>

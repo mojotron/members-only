@@ -12,8 +12,13 @@
     <main class="flex gap-2 p-4">
       <aside class="flex flex-col gap-1">
         <%- include("../partials/cta-link", {path:"/messages/new", display:
-        "create new message"}) %> <%- include("../partials/cta-link",
-        {path:"/messages", display: "list your messages"}) %>
+        "create new message"}) %>
+        <!--  -->
+        <%- include("../partials/cta-link", {path:"/messages", display: `list
+        your messages`}) %>
+        <!--  -->
+        <% if(!isCurrentMember) { %> <%- include("../partials/cta-link",
+        {path:"/membership", display: `become member`}) %> <% } %>
       </aside>
 
       <section class="w-full">

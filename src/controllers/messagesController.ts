@@ -8,13 +8,14 @@ import {
   selectMessageByUid,
   updateMessage,
   deleteMessageByUid,
+  selectUser,
 } from "../db/queries.js";
 // types
 import type { AppUserType } from "../types/userTypes.js";
 import type { MessageCardType } from "../types/messagesTypes.js";
 // helpers
 import isMember from "../utils/isMember.js";
-import { timeDistance } from "../utils/formatTime.js";
+import { timeDistance, dateCreated } from "../utils/formatTime.js";
 
 // GET
 const getMessages = async (req: Request, res: Response, next: NextFunction) => {
@@ -26,16 +27,48 @@ const getMessages = async (req: Request, res: Response, next: NextFunction) => {
 
     const messagesModified = messages.map((msg) => ({
       ...msg,
-      member: currentUserIsMember,
-      author: msg.userUid === currentUser.userUid,
+      isMember: currentUserIsMember,
+      isCurrentAuthor: msg.userUid === currentUser.userUid,
       createdAt: timeDistance(msg.createdAt),
     }));
 
-    console.log(messagesModified);
+    console.log(req.user);
 
     return res.status(StatusCodes.OK).render("pages/messages", {
       isAuth: req.isAuthenticated(),
       messages: messagesModified,
+      isCurrentMember: currentUserIsMember,
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+const getMessage = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { messageUid } = req.params;
+    const currentUser = req.user as AppUserType;
+
+    const message = await selectMessageByUid(messageUid as string);
+    const messagesModified = {
+      ...message,
+      createdAt: timeDistance(message?.createdAt as string),
+      dateCreated: dateCreated(message?.createdAt as string),
+    };
+
+    const isCurrentAuthor = currentUser.userUid === message?.userUid;
+    const isCurrentMember = currentUser.member;
+
+    let messageAuthor: AppUserType | undefined = undefined;
+    if (!isCurrentAuthor && isCurrentMember) {
+      messageAuthor = await selectUser(message?.userUid as string);
+    }
+
+    res.status(StatusCodes.OK).render("pages/message-details", {
+      isAuth: req.isAuthenticated(),
+      message: messagesModified,
+      author: messageAuthor || currentUser,
+      isCurrentAuthor,
+      isCurrentMember,
     });
   } catch (error) {
     return next(error);
@@ -162,6 +195,7 @@ const deleteMessage = async (
 
 export {
   getMessages,
+  getMessage,
   createMessageView,
   createMessage,
   editMessageView,

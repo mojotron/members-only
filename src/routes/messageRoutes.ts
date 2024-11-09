@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   getMessages,
+  getMessage,
   createMessageView,
   createMessage,
   editMessageView,
@@ -17,6 +18,8 @@ router.get("/", getMessages);
 // create message
 router.get("/new", createMessageView);
 router.post("/new", messageValidator, messageValidation, createMessage);
+// read  messages
+router.get("/:messageUid", getMessage);
 // update message
 router.get("/:messageUid/edit", editMessageView);
 router.post(

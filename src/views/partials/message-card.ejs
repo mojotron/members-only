@@ -16,16 +16,20 @@ params {
     <%- include("./icon-link", {path: `/messages/${message.messageUid}`, type:
     "view"}) %>
     <!--  -->
-    <% if(message.author === true) { %> <%- include("./icon-link", {path:
-    `/messages/${message.messageUid}/edit`, type: "edit"}) %>
+    <% if(message.isCurrentAuthor === true) { %>
+    <!--  -->
+    <%- include("./icon-link", {path: `/messages/${message.messageUid}/edit`,
+    type: "edit"}) %>
     <!--  -->
     <%- include("./icon-link", {path: `/messages/${message.messageUid}/delete`,
-    type: "delete"}) %> <% } %>
+    type: "delete"}) %>
+    <!--  -->
+    <% } %>
   </div>
 
   <h3 class="font-display text-pink text-lg font-bold"><%- message.title %></h3>
 
-  <% if(message.author || message.member) { %>
+  <% if(message.isCurrentAuthor || message.isMember) { %>
   <p class="text-gray-200 text-sm"><%- message.createdAt %></p>
   <% } %>
 </li>

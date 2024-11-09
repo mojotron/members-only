@@ -39,7 +39,6 @@ const logInValidation = (req: Request, res: Response, next: NextFunction) => {
 
 const messageValidation = (req: Request, res: Response, next: NextFunction) => {
   const { messageUid } = req.params;
-  console.log("val", messageUid);
 
   const result = validationResult(req);
   if (!result.isEmpty()) {
@@ -60,4 +59,28 @@ const messageValidation = (req: Request, res: Response, next: NextFunction) => {
   return next();
 };
 
-export { signUpValidation, logInValidation, messageValidation };
+const membershipValidation = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const result = validationResult(req);
+  if (!result.isEmpty()) {
+    const errorMessages = result.array().map((err) => err.msg);
+    return res.status(StatusCodes.OK).render("pages/message-form", {
+      actionPath: `/membership`,
+      values: {
+        answer: req.body.title,
+      },
+      errors: errorMessages,
+    });
+  }
+  return next();
+};
+
+export {
+  signUpValidation,
+  logInValidation,
+  messageValidation,
+  membershipValidation,
+};

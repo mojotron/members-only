@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>Members Only | Basic User Auth</title>
+  </head>
+  <body class="w-[100vw] h-[100vh] flex flex-col bg-white">
+    <%- include("../partials/header.ejs", {isAuth: locals.isAuth || true}) %>
+    <!--  -->
+    <main class="flex gap-2 p-4 w-full justify-center">
+      <section class="w-full pt-4 flex flex-col items-center gap-4">
+        <%- include("../partials/section-heading", {display: `Get Membership`})
+        %>
+
+        <p class="font-bold text-gray-400 text-lg px-4"><%- question %></p>
+
+        <form
+          class="w-full sm:w-[500px]"
+          action="<%- actionPath %>"
+          method="post"
+        >
+          <!--  -->
+          <%- include("../partials/input-field", {label: `answer to question`,
+          nameId: "answer", type: "text", value: values.answer}) %>
+          <!--  -->
+          <% if(errors.length > 0) { %>
+          <!--  -->
+          <%- include("../partials/form-errors",{errors: errors}) %>
+          <!--  -->
+          <% } %>
+          <!--  -->
+          <%- include("../partials/cta-button", {display: `Submit`, type:
+          "submit"}) %>
+        </form>
+      </section>
+    </main>
+    <!--  -->
+    <%- include("../partials/footer.ejs") %>
+  </body>
+</html>
