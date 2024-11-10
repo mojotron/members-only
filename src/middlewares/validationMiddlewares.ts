@@ -67,10 +67,12 @@ const membershipValidation = (
   const result = validationResult(req);
   if (!result.isEmpty()) {
     const errorMessages = result.array().map((err) => err.msg);
-    return res.status(StatusCodes.OK).render("pages/message-form", {
+    return res.status(StatusCodes.OK).render("pages/membership", {
+      isAuth: req.isAuthenticated(),
+      question: process.env.MEMBERSHIP_QUESTION,
       actionPath: `/membership`,
       values: {
-        answer: req.body.title,
+        answer: "",
       },
       errors: errorMessages,
     });

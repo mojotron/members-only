@@ -22,8 +22,8 @@
           method="post"
         >
           <!--  -->
-          <%- include("../partials/input-field", {label: `answer to question`,
-          nameId: "answer", type: "text", value: values.answer}) %>
+          <%- include("../partials/input-field", {label: ``, nameId: "answer",
+          type: "text", value: values.answer}) %>
           <!--  -->
           <% if(errors.length > 0) { %>
           <!--  -->
@@ -31,7 +31,7 @@
           <!--  -->
           <% } %>
           <!--  -->
-          <%- include("../partials/cta-button", {display: `Submit`, type:
+          <%- include("../partials/cta-button", {display: `submit answer`, type:
           "submit"}) %>
         </form>
       </section>

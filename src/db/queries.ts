@@ -150,12 +150,24 @@ const deleteMessageByUid = async (messageUid: string) => {
       [messageUid]
     );
   } catch (error) {
-    console.log(error);
-
     throw new Error("db error: delete messages");
   }
 };
 
+// update user to member
+const updateUserToMember = async (userUid: string) => {
+  try {
+    await pool.query(
+      `UPDATE app_user
+      SET member = true
+      WHERE user_uid = $1`,
+      [userUid]
+    );
+  } catch (error) {
+    console.log(error);
+    throw new Error("db error: membership");
+  }
+};
 export {
   // auth
   insertUser,
@@ -167,4 +179,6 @@ export {
   selectMessageByUid,
   updateMessage,
   deleteMessageByUid,
+  // membership
+  updateUserToMember,
 };
