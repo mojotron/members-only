@@ -549,8 +549,16 @@ video {
      -moz-appearance: none;
           appearance: none;
 }
+.appearance-auto{
+  -webkit-appearance: auto;
+     -moz-appearance: auto;
+          appearance: auto;
+}
 .flex-col{
   flex-direction: column;
+}
+.items-end{
+  align-items: flex-end;
 }
 .items-center{
   align-items: center;
@@ -702,6 +710,9 @@ video {
 .shadow-gray-200{
   --tw-shadow-color: #a8acb9;
   --tw-shadow: var(--tw-shadow-colored);
+}
+.filter{
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .placeholder\:text-gray-200::-moz-placeholder{
   --tw-text-opacity: 1;

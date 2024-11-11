@@ -102,6 +102,49 @@ const selectMessagesByUserUid = async (
   }
 };
 
+const selectMessagesByFilter = async (
+  filter: string,
+  search: string
+): Promise<MessageCardType[]> => {
+  try {
+    if (filter === "title") {
+      const { rows } = await pool.query(
+        `SELECT
+        message.message_uid AS "messageUid",
+        message.title,
+        message.created_at AS "createdAt",
+        app_user.user_uid AS "userUid"
+        FROM message INNER JOIN app_user
+        ON message.user_id = app_user.user_uid
+        WHERE message.title LIKE $1
+        ORDER BY message.created_at ASC`,
+        [`%${search}%`]
+      );
+      return rows;
+    }
+    if (filter === "first_name" || filter === "last_name") {
+      const { rows } = await pool.query(
+        `SELECT
+        message.message_uid AS "messageUid",
+        message.title,
+        message.created_at AS "createdAt",
+        app_user.user_uid AS "userUid"
+        FROM message INNER JOIN app_user
+        ON message.user_id = app_user.user_uid
+        WHERE app_user.first_name LIKE $1 OR app_user.last_name LIKE $1
+        ORDER BY message.created_at ASC`,
+        [`%${search}%`]
+      );
+      return rows;
+    }
+  } catch (error) {
+    console.log(error);
+    throw new Error("db error: search filters");
+  }
+
+  return [];
+};
+
 const selectMessageByUid = async (
   messageUid: string
 ): Promise<MessageType | undefined> => {
@@ -179,6 +222,7 @@ export {
   selectMessageByUid,
   updateMessage,
   deleteMessageByUid,
+  selectMessagesByFilter,
   // membership
   updateUserToMember,
 };

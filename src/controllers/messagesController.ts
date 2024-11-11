@@ -9,6 +9,7 @@ import {
   updateMessage,
   deleteMessageByUid,
   selectUser,
+  selectMessagesByFilter,
 } from "../db/queries.js";
 // types
 import type { AppUserType } from "../types/userTypes.js";
@@ -23,16 +24,41 @@ const getMessages = async (req: Request, res: Response, next: NextFunction) => {
     const currentUser = req.user as AppUserType;
     const currentUserIsMember = isMember(req);
 
-    const messages = await selectMessagesByUserUid(currentUser.userUid);
+    // search filtering
+    let messageResult: MessageCardType[] = [];
+    const { filter, search } = req.query;
+    if (currentUserIsMember && filter !== undefined && search !== undefined) {
+      // search by filter
+      console.log("full filter", filter, search);
 
-    const messagesModified = messages.map((msg) => ({
+      messageResult = await selectMessagesByFilter(
+        filter as string,
+        search as string
+      );
+    } else if (
+      currentUserIsMember === false &&
+      filter === undefined &&
+      search !== undefined
+    ) {
+      console.log("title filter", filter, search);
+
+      // search by title
+      messageResult = await selectMessagesByFilter("title", search as string);
+    } else {
+      console.log("no filter", filter, search);
+      // find messages current user created
+      messageResult = await selectMessagesByUserUid(currentUser.userUid);
+    }
+    //
+
+    const messagesModified = messageResult.map((msg) => ({
       ...msg,
       isMember: currentUserIsMember,
       isCurrentAuthor: msg.userUid === currentUser.userUid,
       createdAt: timeDistance(msg.createdAt),
     }));
 
-    console.log(req.user);
+    console.log(messagesModified);
 
     return res.status(StatusCodes.OK).render("pages/messages", {
       isAuth: req.isAuthenticated(),
