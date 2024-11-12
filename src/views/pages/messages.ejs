@@ -49,15 +49,7 @@
           />
         </form>
 
-        <% if(messages.length > 0) { %>
-        <ul class="space-y-2">
-          <% messages.forEach((msg) => { %>
-          <!--  -->
-          <%- include("../partials/message-card", {message: msg}) %> <% }); %>
-        </ul>
-        <% } else { %>
-        <p class="text-gray-200 font-bold">no messages found</p>
-        <% } %>
+        <%- include('../partials/message-card-list', {messages: messages}) %>
       </section>
     </main>
     <!--  -->

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>Members Only | Basic User Auth</title>
+  </head>
+  <body class="w-[100vw] h-[100vh] flex flex-col bg-white">
+    <%- include("../partials/header.ejs", {isAuth: locals.isAuth || false}) %>
+    <!--  -->
+    <main class="p-8 flex flex-col items-center gap-6">
+      <%- include("../partials/section-heading.ejs", {display: `About this
+      project`}) %>
+      <!--  -->
+      <%- include("../partials/paragraph.ejs", {text: `In this application where
+      users can write anonymous posts. Users can become members, members can see
+      who the author of a post is, but non member user can only see the story
+      and wonder who wrote it.`}) %>
+      <!--  -->
+      <%-include("../partials/paragraph.ejs", {text: `Goal of this project is to
+      learn and use the authentication skills, practicing your database skills
+      and using typescript with express!. Authentication is build with passport
+      library and local passport strategy.`}) %>
+      <!--  -->
+      <%- include("../partials/paragraph.ejs", {text: `This project is part of
+      The Odin Project curriculum. The Odin Project empowers aspiring web
+      developers to learn together for free.`}) %>
+
+      <p class="text-gray-400">
+        <span>Visit</span>
+        <a
+          class="text-pink font-bold hover:text-gray-200"
+          href="https://www.theodinproject.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >The Odin Project</a
+        >
+        <span>and start learning web development.</span>
+      </p>
+    </main>
+    <!--  -->
+    <%- include("../partials/footer.ejs") %>
+  </body>
+</html>

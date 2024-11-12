@@ -9,7 +9,36 @@
   <body class="w-[100vw] h-[100vh] flex flex-col bg-white">
     <%- include("../partials/header.ejs", {isAuth: locals.isAuth || false}) %>
     <!--  -->
-    <main></main>
+    <main class="w-full p-4 flex flex-col items-center justify-stretch gap-2">
+      <% if(isAuth === false) { %>
+      <!--  -->
+      <%- include("../partials/section-heading", {display: `Welcome to Members
+      Only`}) %> <%- include("../partials/paragraph", {text: `To create your own
+      message login in or create account by signup. To find out who is message
+      author, become member by answering secret question!`}) %>
+      <!--  -->
+      <% } %>
+      <!--  -->
+      <%- include('../partials/section-heading', {display: `Latest messages`})
+      %>
+      <!--  -->
+      <%- include('../partials/message-card-list', {messages: messages}) %>
+      <!-- PAGINATION -->
+      <div class="flex items-center justify-center gap-8">
+        <% if(currentPage > 1) { %>
+        <!--  -->
+        <%- include("../partials/cta-link", {path: `/?page=${currentPage - 1}`,
+        display: `\<\< prev`}) %>
+        <!--  -->
+        <% } %>
+        <!--  -->
+        <% if(pageLimit >= messages.length && messages.length !== 0) { %> <%-
+        include("../partials/cta-link", {path: `/?page=${currentPage + 1}`,
+        display: `next >>`}) %>
+        <!--  -->
+        <% } %>
+      </div>
+    </main>
     <!--  -->
     <%- include("../partials/footer.ejs") %>
   </body>

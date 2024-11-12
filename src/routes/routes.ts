@@ -12,6 +12,7 @@ import {
   indexView,
   signUpView,
   logInView,
+  aboutView,
 } from "../controllers/viewsController.js";
 import { signUp, logOut } from "../controllers/authController.js";
 // login auth
@@ -27,6 +28,7 @@ const router = Router();
 router.get("/", indexView);
 router.get("/sign-up", signUpView);
 router.get("/log-in", logInView);
+router.get("/about", aboutView);
 // auth
 router.post("/sign-up", signUpValidators, signUpValidation, signUp);
 router.post("/log-in", logInValidators, logInValidation, authMiddleware);

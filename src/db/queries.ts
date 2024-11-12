@@ -145,6 +145,32 @@ const selectMessagesByFilter = async (
   return [];
 };
 
+const selectLatestMessages = async (
+  page: number,
+  limit: number
+): Promise<MessageCardType[]> => {
+  try {
+    const offset = (page - 1) * limit;
+    const { rows } = await pool.query(
+      `SELECT
+      title,
+      text,
+      message_uid AS "messageUid",
+      created_at AS "createdAt",
+      user_id AS "userUid"
+      FROM message
+      ORDER BY created_at DESC
+      LIMIT $1 OFFSET $2;`,
+      [limit, offset]
+    );
+
+    return rows;
+  } catch (error) {
+    console.log(error);
+    throw new Error("db error: select latest messages");
+  }
+};
+
 const selectMessageByUid = async (
   messageUid: string
 ): Promise<MessageType | undefined> => {
@@ -217,6 +243,7 @@ export {
   selectUserAuth,
   selectUser,
   // messages
+  selectLatestMessages,
   insertMessage,
   selectMessagesByUserUid,
   selectMessageByUid,

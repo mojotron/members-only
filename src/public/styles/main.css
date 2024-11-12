@@ -572,6 +572,9 @@ video {
 .justify-evenly{
   justify-content: space-evenly;
 }
+.justify-stretch{
+  justify-content: stretch;
+}
 .gap-1{
   gap: 8px;
 }
@@ -631,6 +634,9 @@ video {
 }
 .p-4{
   padding: 24px;
+}
+.p-8{
+  padding: 56px;
 }
 .px-3{
   padding-left: 16px;
@@ -741,6 +747,10 @@ video {
 .hover\:text-black:hover{
   --tw-text-opacity: 1;
   color: rgb(37 33 30 / var(--tw-text-opacity));
+}
+.hover\:text-gray-200:hover{
+  --tw-text-opacity: 1;
+  color: rgb(168 172 185 / var(--tw-text-opacity));
 }
 .hover\:text-gray-400:hover{
   --tw-text-opacity: 1;

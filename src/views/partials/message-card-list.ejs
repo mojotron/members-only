@@ -1,0 +1,23 @@
+<!-- 
+params: messages[
+  message: {
+      messageUid,
+      title,
+      createdAt,
+      userUid,
+      //
+      member: boolean,
+      author: boolean,
+    }
+  ]
+-->
+
+<% if(messages.length > 0) { %>
+<ul class="w-full space-y-2">
+  <% messages.forEach((msg) => { %>
+  <!--  -->
+  <%- include("./message-card", {message: msg}) %> <% }); %>
+</ul>
+<% } else { %>
+<p class="text-gray-200 font-bold">no messages found</p>
+<% } %>
