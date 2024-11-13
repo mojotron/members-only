@@ -104,9 +104,13 @@ const selectMessagesByUserUid = async (
 
 const selectMessagesByFilter = async (
   filter: string,
-  search: string
+  search: string,
+  page: number,
+  limit: number
 ): Promise<MessageCardType[]> => {
   try {
+    const offset = (page - 1) * limit;
+
     if (filter === "title") {
       const { rows } = await pool.query(
         `SELECT
@@ -117,8 +121,9 @@ const selectMessagesByFilter = async (
         FROM message INNER JOIN app_user
         ON message.user_id = app_user.user_uid
         WHERE message.title LIKE $1
-        ORDER BY message.created_at ASC`,
-        [`%${search}%`]
+        ORDER BY message.created_at ASC
+        LIMIT $2 OFFSET $3;`,
+        [`%${search}%`, limit, offset]
       );
       return rows;
     }
@@ -132,8 +137,9 @@ const selectMessagesByFilter = async (
         FROM message INNER JOIN app_user
         ON message.user_id = app_user.user_uid
         WHERE app_user.first_name LIKE $1 OR app_user.last_name LIKE $1
-        ORDER BY message.created_at ASC`,
-        [`%${search}%`]
+        ORDER BY message.created_at ASC
+        LIMIT $2 OFFSET $3;`,
+        [`%${search}%`, limit, offset]
       );
       return rows;
     }
@@ -151,6 +157,7 @@ const selectLatestMessages = async (
 ): Promise<MessageCardType[]> => {
   try {
     const offset = (page - 1) * limit;
+
     const { rows } = await pool.query(
       `SELECT
       title,

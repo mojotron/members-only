@@ -11,14 +11,17 @@
     <!--  -->
     <main class="flex gap-2 p-4">
       <aside class="flex flex-col gap-1">
-        <%- include("../partials/cta-link", {path:"/messages/new", display:
+        <%- include("../partials/cta-link", {path:`/messages/new`, display:
         "create new message"}) %>
         <!--  -->
-        <%- include("../partials/cta-link", {path:"/messages", display: `list
-        your messages`}) %>
+        <%- include("../partials/cta-link", {path:`/messages`, display: `list
+        latest messages`}) %>
         <!--  -->
-        <% if(!isCurrentMember) { %> <%- include("../partials/cta-link",
-        {path:"/membership", display: `become member`}) %> <% } %>
+        <%- include("../partials/cta-link", {path:`/messages/?user=current`,
+        display: `list your messages`}) %>
+        <!--  -->
+        <% if(!isCurrentMember) { %> <%- include("../partials/cta-link", {path:
+        `/membership`, display: `become member`}) %> <% } %>
       </aside>
 
       <section class="w-full space-y-4">
@@ -50,6 +53,9 @@
         </form>
 
         <%- include('../partials/message-card-list', {messages: messages}) %>
+        <!-- PAGINATION -->
+        <%- include('../partials/page-slider', {currentPage, pageLimit,
+        messagesLength: messages.length, prevPath, nextPath}) %>
       </section>
     </main>
     <!--  -->

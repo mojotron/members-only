@@ -24,20 +24,9 @@
       <!--  -->
       <%- include('../partials/message-card-list', {messages: messages}) %>
       <!-- PAGINATION -->
-      <div class="flex items-center justify-center gap-8">
-        <% if(currentPage > 1) { %>
-        <!--  -->
-        <%- include("../partials/cta-link", {path: `/?page=${currentPage - 1}`,
-        display: `\<\< prev`}) %>
-        <!--  -->
-        <% } %>
-        <!--  -->
-        <% if(pageLimit >= messages.length && messages.length !== 0) { %> <%-
-        include("../partials/cta-link", {path: `/?page=${currentPage + 1}`,
-        display: `next >>`}) %>
-        <!--  -->
-        <% } %>
-      </div>
+      <%- include("../partials/page-slider",{ currentPage: currentPage,
+      pageLimit: pageLimit, messagesLength: messages.length, prevPath:
+      `/?page=${currentPage - 1}`, nextPath: `/?page=${currentPage + 1}` }) %>
     </main>
     <!--  -->
     <%- include("../partials/footer.ejs") %>

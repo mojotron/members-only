@@ -1,0 +1,22 @@
+<!-- 
+params: {
+  currentPage: number,
+  pageLimit: number,
+  messagesLength: number,
+  prevPath: string,
+  nextPath: string,
+}
+-->
+
+<div class="flex items-center justify-center gap-8">
+  <% if(currentPage > 1) { %>
+  <!--  -->
+  <%- include("./cta-link", {path: prevPath, display: `\<\< prev`}) %>
+  <!--  -->
+  <% } %>
+  <!--  -->
+  <% if(pageLimit >= messagesLength && messagesLength !== 0) { %> <%-
+  include("./cta-link", {path: nextPath, display: `next >>`}) %>
+  <!--  -->
+  <% } %>
+</div>

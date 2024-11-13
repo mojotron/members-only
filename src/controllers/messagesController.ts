@@ -1,3 +1,4 @@
+import { encode } from "node:querystring";
 import { Request, Response, NextFunction } from "express";
 import { StatusCodes } from "http-status-codes";
 import { matchedData } from "express-validator";
@@ -10,6 +11,7 @@ import {
   deleteMessageByUid,
   selectUser,
   selectMessagesByFilter,
+  selectLatestMessages,
 } from "../db/queries.js";
 // types
 import type { AppUserType } from "../types/userTypes.js";
@@ -17,37 +19,56 @@ import type { MessageCardType } from "../types/messagesTypes.js";
 // helpers
 import isMember from "../utils/isMember.js";
 import { timeDistance, dateCreated } from "../utils/formatTime.js";
+// constants
+import { MESSAGE_LIMIT } from "../constants/messageConstants.js";
 
 // GET
 const getMessages = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    const { user, page, filter, search } = req.query;
     const currentUser = req.user as AppUserType;
     const currentUserIsMember = isMember(req);
 
+    const pageNumber = page !== undefined ? parseInt(page as string) : 1;
     // search filtering
     let messageResult: MessageCardType[] = [];
-    const { filter, search } = req.query;
-    if (currentUserIsMember && filter !== undefined && search !== undefined) {
-      // search by filter
-      console.log("full filter", filter, search);
+    let queryParams: { [key: string]: string | number } = {};
 
+    if (user === "current") {
+      // search for current user messages
+      messageResult = await selectMessagesByUserUid(currentUser.userUid);
+      queryParams.user = "current";
+    } else if (
+      currentUserIsMember &&
+      filter !== undefined &&
+      search !== undefined
+    ) {
+      // search by filter
       messageResult = await selectMessagesByFilter(
         filter as string,
-        search as string
+        search as string,
+        pageNumber,
+        MESSAGE_LIMIT
       );
+      queryParams.filter = filter as string;
+      queryParams.search = search as string;
     } else if (
       currentUserIsMember === false &&
       filter === undefined &&
       search !== undefined
     ) {
-      console.log("title filter", filter, search);
-
       // search by title
-      messageResult = await selectMessagesByFilter("title", search as string);
+      messageResult = await selectMessagesByFilter(
+        "title",
+        search as string,
+        pageNumber,
+        MESSAGE_LIMIT
+      );
+      queryParams.filter = "title";
+      queryParams.search = search as string;
     } else {
-      console.log("no filter", filter, search);
-      // find messages current user created
-      messageResult = await selectMessagesByUserUid(currentUser.userUid);
+      // find latest messages
+      messageResult = await selectLatestMessages(pageNumber, MESSAGE_LIMIT);
     }
     //
 
@@ -58,12 +79,20 @@ const getMessages = async (req: Request, res: Response, next: NextFunction) => {
       createdAt: timeDistance(msg.createdAt),
     }));
 
-    console.log(messagesModified);
+    const hasQueryParams = Object.keys(queryParams).length > 0;
 
     return res.status(StatusCodes.OK).render("pages/messages", {
       isAuth: req.isAuthenticated(),
       messages: messagesModified,
       isCurrentMember: currentUserIsMember,
+      currentPage: pageNumber,
+      pageLimit: MESSAGE_LIMIT,
+      prevPath: `/messages?page=${pageNumber - 1}${
+        hasQueryParams ? `$${encode(queryParams)}` : ""
+      }`,
+      nextPath: `/messages?page=${pageNumber + 1}${
+        hasQueryParams ? `$${encode(queryParams)}` : ""
+      }`,
     });
   } catch (error) {
     return next(error);
