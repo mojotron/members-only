@@ -9,7 +9,7 @@
   <body class="w-[100vw] h-[100vh] flex flex-col bg-white">
     <%- include("../partials/header.ejs", {isAuth: locals.isAuth || true}) %>
     <!--  -->
-    <main class="flex gap-2 p-4">
+    <main class="flex flex-col gap-2 p-2 sm:flex-row sm:p-4 md:justify-center">
       <aside class="flex flex-col gap-1">
         <%- include("../partials/cta-link", {path:`/messages/new`, display:
         "create new message"}) %>
@@ -24,7 +24,7 @@
         `/membership`, display: `become member`}) %> <% } %>
       </aside>
 
-      <section class="w-full space-y-4">
+      <section class="w-full md:w-[600px] space-y-4">
         <form action="/messages" method="get" class="flex items-end">
           <% if(isCurrentMember) { %>
           <div class="">

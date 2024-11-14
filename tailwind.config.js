@@ -40,7 +40,7 @@ export default {
     colors: {
       white: "#eae6e3",
       gray: {
-        200: "#a8acb9",
+        200: "#a2a7b4",
         400: "#5b5a5c",
       },
       black: "#25211e",

@@ -15,8 +15,9 @@ params: {
   <!--  -->
   <% } %>
   <!--  -->
-  <% if(pageLimit >= messagesLength && messagesLength !== 0) { %> <%-
-  include("./cta-link", {path: nextPath, display: `next >>`}) %>
+  <% if(messagesLength >= pageLimit) { %>
+  <!--  -->
+  <%- include("./cta-link", {path: nextPath, display: `next >>`}) %>
   <!--  -->
   <% } %>
 </div>

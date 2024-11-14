@@ -36,22 +36,19 @@
           </h2>
           <!--  -->
           <% if(isCurrentAuthor || isCurrentMember) { %>
-          <div class="text-gray-400">
+          <div class="text-gray-200">
             <span>created by</span>
-            <span class="font-bold"
+            <span class="font-bold text-gray-400"
               ><%- author.firstName %> <%- author.lastName %></span
             >
             <span><%- message.createdAt %></span>
-            <span class="text-sm text-gray-200"
-              >(<%- message.dateCreated %>)</span
-            >
+            <span>(<%- message.dateCreated %>)</span>
           </div>
-
           <% } %>
           <!--  -->
         </header>
 
-        <section>
+        <section class="pt-2 pb-6">
           <%- include("../partials/paragraph", {text: message.text}) %>
         </section>
       </article>
