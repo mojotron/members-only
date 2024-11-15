@@ -1,6 +1,8 @@
 import pool from "./pool.js";
+import { DatabaseError } from "../errors/index.js";
+// types
+import type { MessageCardType, MessageType } from "../types/messagesTypes.js";
 import type { AppUserType, UserSignupType } from "../types/userTypes.js";
-import { MessageCardType, MessageType } from "../types/messagesTypes.js";
 
 const insertUser = async (userData: UserSignupType) => {
   const timestamp = new Date().toISOString();
@@ -18,7 +20,7 @@ const insertUser = async (userData: UserSignupType) => {
       ]
     );
   } catch (error) {
-    throw new Error("db error: insert new user");
+    throw new DatabaseError("We encountered problem creating new user!");
   }
 };
 
@@ -37,7 +39,7 @@ const selectUserAuth = async (
       password: user.password,
     };
   } catch (error) {
-    throw new Error("db error: select user auth");
+    throw new DatabaseError("We encountered problem finding user!");
   }
 };
 
@@ -59,7 +61,7 @@ const selectUser = async (
 
     return user;
   } catch (error) {
-    throw new Error("db error: select user");
+    throw new DatabaseError("We encountered problem finding user!");
   }
 };
 
@@ -75,7 +77,7 @@ const insertMessage = async (userUid: string, title: string, text: string) => {
       [userUid, title, text, timestamp]
     );
   } catch (error) {
-    throw new Error("db error: insert message");
+    throw new DatabaseError("We encountered problem creating new message!");
   }
 };
 
@@ -98,7 +100,9 @@ const selectMessagesByUserUid = async (
     return rows;
   } catch (error) {
     console.log(error);
-    throw new Error("db error: select messages by user uid");
+    throw new DatabaseError(
+      "We encountered problem finding messages with given user uid!"
+    );
   }
 };
 
@@ -144,8 +148,9 @@ const selectMessagesByFilter = async (
       return rows;
     }
   } catch (error) {
-    console.log(error);
-    throw new Error("db error: search filters");
+    throw new DatabaseError(
+      "We encountered problem finding message with specified filters!"
+    );
   }
 
   return [];
@@ -174,7 +179,7 @@ const selectLatestMessages = async (
     return rows;
   } catch (error) {
     console.log(error);
-    throw new Error("db error: select latest messages");
+    throw new DatabaseError("We encountered problem finding latest message!");
   }
 };
 
@@ -196,7 +201,9 @@ const selectMessageByUid = async (
 
     return rows[0];
   } catch (error) {
-    throw new Error("db error: select messages by message uid");
+    throw new DatabaseError(
+      "We encountered problem finding message with given message uid!"
+    );
   }
 };
 
@@ -214,7 +221,7 @@ const updateMessage = async (
       [messageUid, title, text, timestamp]
     );
   } catch (error) {
-    throw new Error("db error: update messages");
+    throw new DatabaseError("We encountered problem updating message!");
   }
 };
 
@@ -226,7 +233,7 @@ const deleteMessageByUid = async (messageUid: string) => {
       [messageUid]
     );
   } catch (error) {
-    throw new Error("db error: delete messages");
+    throw new DatabaseError("We encountered problem deleting message!");
   }
 };
 
@@ -241,7 +248,9 @@ const updateUserToMember = async (userUid: string) => {
     );
   } catch (error) {
     console.log(error);
-    throw new Error("db error: membership");
+    throw new DatabaseError(
+      "We encountered problem updating current user to member!"
+    );
   }
 };
 export {

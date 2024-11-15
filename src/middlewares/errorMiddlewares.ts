@@ -1,6 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { CustomError, UnauthorizedError } from "../errors/index.js";
+import {
+  CustomError,
+  DatabaseError,
+  UnauthorizedError,
+} from "../errors/index.js";
 import { STATUS_CODES } from "http";
 
 // NOT FOUND
@@ -24,6 +28,14 @@ const errorHandler = (
       isAuth: req.isAuthenticated(),
       heading: `Authentication Required`,
       message: err.message,
+    });
+  }
+
+  if (err instanceof DatabaseError) {
+    return res.status(err.statusCode).render("pages/error", {
+      isAuth: req.isAuthenticated(),
+      heading: `Service unavailable (database)`,
+      message: `${err.message} Please try again later. If this problem persist please contact us via github link in footer section.`,
     });
   }
 

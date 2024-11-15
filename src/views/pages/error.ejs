@@ -9,16 +9,20 @@
   <body class="w-[100vw] h-[100vh] flex flex-col bg-white">
     <%- include("../partials/header.ejs", {isAuth: locals.isAuth || false}) %>
     <!--  -->
-    <main class="p-4 flex flex-col items-center gap-6">
-      <%- include("../partials/section-heading", {display: heading}) %> <%-
-      include("../partials/paragraph", {text: message}) %> <% if(!locals.isAuth)
-      { %>
+    <main
+      class="w-full p-2 flex flex-col items-center justify-stretch gap-2 sm:p-4 md:max-w-[600px] md:mx-auto"
+    >
+      <%- include("../partials/section-heading", {display: heading}) %>
+      <!--  -->
+      <%- include("../partials/paragraph", {text: message}) %>
+      <!--  -->
+      <% if(!locals.isAuth) { %>
       <div>
         <%- include("../partials/cta-link", {path: "/log-in",display: "login"})
         %>
         <!--  -->
         <%- include("../partials/cta-link", {path: "/sign-up",display:
-        "signup"}) %>
+        "signup"}) %> <% } else { %>
       </div>
       <% } %>
     </main>
