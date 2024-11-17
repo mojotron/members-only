@@ -1,12 +1,12 @@
 # Members Only
 
+Project 👉 (Live Preview)[https://translucent-functional-titanoceratops.glitch.me/]
+
 Build an exclusive clubhouse where members can write anonymous messages. Inside the clubhouse, members can see who the author of a message is, but outside they can only see the story and wonder who wrote it.
 
 This project is part of [The Odin Project](https://www.theodinproject.com/lessons/nodejs-mini-message-board) curriculum.
 
 Goal of this project is practice building express apps, adding authentication and using typescript as additional learning layer.
-
-Project (Live Preview)[]
 
 ## Technologies used
 
